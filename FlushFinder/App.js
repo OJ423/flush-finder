@@ -25,8 +25,6 @@ export default function App() {
                   iconName = focused ? 'people-outline' : 'people-outline';
                 } 
                 
-    
-                // You can return any component that you like here!
                 return <Ionicons name={iconName} size={size} color={color} />;
               },
               tabBarActiveTintColor: 'tomato',
