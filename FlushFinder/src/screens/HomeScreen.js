@@ -1,5 +1,5 @@
 
-import DropDownPicker from "react-native-dropdown-picker";
+// import DropDownPicker from "react-native-dropdown-picker";
 import GeoLocationButton from "../components/GeoLocationButton";
 import React from "react";
 import {
@@ -46,7 +46,7 @@ export default class Onboarding extends React.Component {
             </Block>
             <Block row>
               <Block flex={5}>
-                <DropDownPicker />
+                {/* <DropDownPicker /> */}
               </Block>
               <Block flex={1}>
                 <Button onlyIcon icon="direction" iconFamily="Entypo" iconSize={25} iconColor="#fff" style={{ width: 40, height: 40 }}>Use your current location</Button>
