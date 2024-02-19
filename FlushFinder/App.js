@@ -6,10 +6,13 @@ import HomeScreen from './src/screens/HomeScreen'
 import ResultScreen from './src/screens/ResultScreen'
 import About from './src/screens/About'
 
+import { OriginLocationProvider } from './src/context/OriginLocation';
+
 const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
+    <OriginLocationProvider>
     <NavigationContainer>
     <Tab.Navigator
             screenOptions={({ route }) => ({
@@ -35,5 +38,6 @@ export default function App() {
           <Tab.Screen name="About" component={About} />
         </Tab.Navigator>
     </NavigationContainer>
+    </OriginLocationProvider>
   );
 }
