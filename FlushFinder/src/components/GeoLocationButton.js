@@ -19,7 +19,6 @@ export default function GeoLocationButton() {
 
   return (
       <Button onlyIcon icon="direction" iconFamily="Entypo" iconSize={25} iconColor="#fff" style={{ width: 40, height: 40 }} onPress={handleLocationButtonPress}>Use your current location</Button>
-    
   );
 
 }
