@@ -9,7 +9,7 @@ export default function GeoLocationButton() {
     const navigation = useNavigation();
     
     const { setOriginLocation } = useContext(OriginLocationContext)
-    const [ setInitialRegion ] = useState(null);
+    const [ initialRegion, setInitialRegion ] = useState(null);
 
     function handleLocationButtonPress () {
         getCurrentLocation(setOriginLocation, setInitialRegion)
