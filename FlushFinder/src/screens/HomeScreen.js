@@ -8,8 +8,8 @@ import {
   StatusBar,
   Dimensions,
 } from "react-native";
-import { Block, Button, Icon, Text, theme } from "galio-framework";
-import { Ionicons } from "@expo/vector-icons";
+import { Block, Button, Icon, Text, theme,Switch } from "galio-framework";
+import FilterForm from "../components/FilterForm";
 
 const { height, width } = Dimensions.get("screen");
 const backGroungImg = require("../../assets/HomeBackground.jpg");
@@ -46,15 +46,15 @@ export default class Onboarding extends React.Component {
             </Block>
             <Block row>
               <Block flex={5}>
-                <DropDownPicker />
+                <Button>Placeholder for dropdown picker</Button>
               </Block>
               <Block flex={1}>
-                <Button onlyIcon icon="direction" iconFamily="Entypo" iconSize={25} iconColor="#fff" style={{ width: 40, height: 40 }}>Use your current location</Button>
+               <GeoLocationButton/>
               </Block>
             </Block>
+            <FilterForm/>
             <Block center>
-               <GeoLocationButton/>
-              <Button shadowless style={styles.button} onPress={() => {}}>
+              <Button shadowless style={styles.button} onPress={() => {console.log('clicked')}}>
                 SUBMIT
               </Button>
             </Block>
