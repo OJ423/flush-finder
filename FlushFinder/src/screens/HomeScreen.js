@@ -1,4 +1,6 @@
+
 import DropDownPicker from "react-native-dropdown-picker";
+import GeoLocationButton from "../components/GeoLocationButton";
 import React from "react";
 import {
   ImageBackground,
@@ -51,6 +53,7 @@ export default class Onboarding extends React.Component {
               </Block>
             </Block>
             <Block center>
+               <GeoLocationButton/>
               <Button shadowless style={styles.button} onPress={() => {}}>
                 SUBMIT
               </Button>

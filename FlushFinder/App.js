@@ -6,10 +6,13 @@ import HomeScreen from './src/screens/HomeScreen'
 import ResultScreen from './src/screens/ResultScreen'
 import About from './src/screens/About'
 
+import { OriginLocationProvider } from './src/context/OriginLocation';
+
 const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
+    <OriginLocationProvider>
     <NavigationContainer>
     <Tab.Navigator
             screenOptions={({ route }) => ({
@@ -25,8 +28,6 @@ export default function App() {
                   iconName = focused ? 'people-outline' : 'people-outline';
                 } 
                 
-    
-                // You can return any component that you like here!
                 return <Ionicons name={iconName} size={size} color={color} />;
               },
               tabBarActiveTintColor: 'tomato',
@@ -37,5 +38,6 @@ export default function App() {
           <Tab.Screen name="About" component={About} />
         </Tab.Navigator>
     </NavigationContainer>
+    </OriginLocationProvider>
   );
 }
