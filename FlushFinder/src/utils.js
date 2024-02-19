@@ -24,3 +24,5 @@ export default function getCurrentLocation(setOriginLocation, setInitialRegion){
   
     getLocation();
   }
+
+  
