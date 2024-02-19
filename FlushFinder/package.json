@@ -12,6 +12,7 @@
     "@expo/vector-icons": "^14.0.0",
     "@react-navigation/bottom-tabs": "^6.5.12",
     "@react-navigation/native-stack": "^6.9.18",
+    "axios": "^1.6.7",
     "expo": "~50.0.7",
     "expo-status-bar": "~1.11.1",
     "galio-framework": "^0.8.0",
