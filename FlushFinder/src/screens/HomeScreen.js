@@ -1,26 +1,13 @@
-import { View, Button } from "react-native";
-import { OriginLocationContext } from "../context/OriginLocation"; 
-import { useContext, useState } from "react";
-import { useNavigation } from '@react-navigation/native';
+import { View } from "react-native";
+import GeoLocationButton from "../components/GeoLocationButton";
 
-
-
-import getCurrentLocation from "../utils";
 
 export default function HomeScreen() {
-    const navigation = useNavigation();
-    
-    const {originLocation, setOriginLocation} = useContext(OriginLocationContext)
-    const [initialRegion, setInitialRegion] = useState(null);
-
-    function handleLocationButtonPress () {
-        getCurrentLocation(setOriginLocation, setInitialRegion)
-        navigation.navigate('Toilets Near You')
-    }
+  
 
   return (
     <View>
-      <Button title="Use Location" onPress={handleLocationButtonPress}/>
+      <GeoLocationButton/>
     </View>
     
   );
