@@ -1,6 +1,9 @@
 import * as Location from "expo-location";
 
-export default function getCurrentLocation(){
+
+
+export default function getCurrentLocation(setOriginLocation, setInitialRegion){
+
     const getLocation = async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
@@ -18,6 +21,6 @@ export default function getCurrentLocation(){
         longitudeDelta: 0.03,
       });
     };
-
+  
     getLocation();
   }
