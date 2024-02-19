@@ -9,7 +9,7 @@ export default function getCurrentLocation(){
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      setCurrentLocation(location.coords);
+      setOriginLocation(location.coords);
 
       setInitialRegion({
         latitude: location.coords.latitude,

@@ -1,5 +1,13 @@
-import {createContext} from "react"
+import {createContext, useState} from "react"
 
-const OriginLocation = createContext()
+export const OriginLocationContext = createContext()
 
-export default OriginLocation
+export const OriginLocationProvider = ({children}) => {
+    const [originLocation, setOriginLocation] = useState({})
+
+    return (
+        <OriginLocationContext.Provider value={{ originLocation, setOriginLocation}}>
+          {children}
+        </OriginLocationContext.Provider>
+      );
+}
