@@ -1,10 +1,12 @@
 import { useState, useContext, useEffect } from "react";
-import { View, StyleSheet, ActivityIndicator } from "react-native";
+import { View, StyleSheet, ActivityIndicator, Image } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
 import { OriginLocationContext } from "../context/OriginLocation";
 import { ToiletResponseContext } from "../context/ToiletResponse";
 
+const locationPin = require("../../assets/locationPin.png")
+const toiletPin = require("../../assets/toiletPin.png")
 
 export default function MapRender() {
   const [initialRegion, setInitialRegion] = useState({});
@@ -42,8 +44,11 @@ export default function MapRender() {
                 latitude: originLocation.latitude,
                 longitude: originLocation.longitude,
               }}
+              style={{zIndex: 1000}}
               title="Your Location"
-            ></Marker>
+            >
+                <Image source={locationPin} style={{height: 100, width:100, zIndex: 1000}} />
+            </Marker>
           )}
           {!toiletResponse
             ? null
@@ -61,7 +66,9 @@ export default function MapRender() {
                   }
                   title={toilet.name}
                   description={toilet.directions}
-                ></Marker>
+                >
+                  <Image source={toiletPin} style={{height: 60, width:60}} />
+                </Marker>
               ))}
         </MapView>
       )}
