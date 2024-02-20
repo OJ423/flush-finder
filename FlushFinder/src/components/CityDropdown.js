@@ -1,12 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { OriginLocationContext } from "../context/OriginLocation";
-import { View, Text, StyleSheet } from "react-native";
+import { View } from "react-native";
 import RNPickerSelect from 'react-native-picker-select';
 
 export default function CityDropdown() {
   
   const { originLocation, setOriginLocation } = useContext(OriginLocationContext);
   const [selectedValue, setSelectedValue] = useState(null)
+  const [cityOriginLocation, setCityOriginLocation] = useState(null)
 
   let placeholder = {
     label: 'Select a city',
@@ -104,16 +105,12 @@ export default function CityDropdown() {
   })
 
   const handleValueChange = (value) => {
-    if(selectedValue){
-      const selectedCityData = cities.filter((city) => city.name === selectedValue)
-      setOriginLocation({latitude:selectedCityData[0].latitude, longitude: selectedCityData[0].longitude})
-    }
+    setSelectedValue(value)
+    const selectedCityData = cities.filter((city) => city.name === value)
+    setCityOriginLocation({latitude:selectedCityData[0].latitude, longitude: selectedCityData[0].longitude})
   }
+
   
-
-  console.log(originLocation, "<<<-origin")
-  console.log(selectedValue, "<<<-Value")
-
   return(
     <View style={{backgroundColor:"white", borderRadius:5, marginEnd:20}}>
       <RNPickerSelect 
@@ -121,12 +118,9 @@ export default function CityDropdown() {
         items={options}
         onValueChange={(value) => {
           console.log(value, "<<<<On Change Value")
-          setSelectedValue(value)
           handleValueChange(value)
         }}
-        value={selectedValue}
       />
-      {selectedValue && <Text>Selected: {selectedValue}</Text>}
     </View>
   )
 }
