@@ -1,6 +1,5 @@
-import DropDownPicker from "react-native-dropdown-picker";
 import GeoLocationButton from "../components/GeoLocationButton";
-import React, { useCallback, useEffect, useContext, useState } from "react";
+import React, { useCallback, useEffect, useContext, useState }, { useCallback, useEffect, useContext, useState } from "react";
 import {
   ImageBackground,
   StyleSheet,
@@ -10,6 +9,7 @@ import {
 import { Block, Button, Icon, Text, theme, Switch } from "galio-framework";
 import FilterForm from "../components/FilterForm";
 import * as SplashScreen from "expo-splash-screen";
+import CityDropdown from "../components/CityDropdown";
 
 const { height, width } = Dimensions.get("screen");
 const backGroungImg = require("../../assets/HomeBackground.jpg");
@@ -76,7 +76,7 @@ export default function HomeScreen() {
           </Block>
           <Block row>
             <Block flex={5}>
-              <Button>Placeholder for dropdown picker</Button>
+              <CityDropdown />
             </Block>
             <Block flex={1}>
               <GeoLocationButton />
