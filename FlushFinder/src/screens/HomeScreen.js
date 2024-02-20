@@ -59,9 +59,9 @@ export default function HomeScreen() {
              <GeoLocationButton/>
             </Block>
           </Block>
-          <FilterForm/>
+          <FilterForm isAccessibleOnly={isAccessibleOnly} setIsAccessibleOnly={setIsAccessibleOnly} hasChangingTable={hasChangingTable} setHasChangingTable={setHasChangingTable} isUnisexOnly={isUnisexOnly} setIsUnisexOnly={setIsUnisexOnly}/>
           <Block center>
-            <Button shadowless style={styles.button} onPress={() => {console.log('clicked')}}>
+            <Button shadowless style={styles.button} onPress={() => {console.log(isAccessibleOnly,isUnisexOnly,hasChangingTable)}}>
               SUBMIT
             </Button>
           </Block>
