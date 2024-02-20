@@ -105,11 +105,12 @@ export default function CityDropdown() {
   })
 
   const handleValueChange = (value) => {
+    if (value) {
     setSelectedValue(value)
     const selectedCityData = cities.filter((city) => city.name === value)
     setCityOriginLocation({latitude:selectedCityData[0].latitude, longitude: selectedCityData[0].longitude})
+    }
   }
-
   
   return(
     <View style={{backgroundColor:"white", borderRadius:5, marginEnd:20}}>
@@ -117,7 +118,6 @@ export default function CityDropdown() {
         placeholder={placeholder}
         items={options}
         onValueChange={(value) => {
-          console.log(value, "<<<<On Change Value")
           handleValueChange(value)
         }}
       />
