@@ -13,13 +13,6 @@ export default function getCurrentLocation(setOriginLocation, setInitialRegion){
 
       let location = await Location.getCurrentPositionAsync({});
       setOriginLocation(location.coords);
-
-      setInitialRegion({
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-        latitudeDelta: 0.03,
-        longitudeDelta: 0.03,
-      });
     };
   
     getLocation();

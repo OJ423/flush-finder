@@ -1,6 +1,6 @@
 import { View, Button } from "react-native";
 import { OriginLocationContext } from "../context/OriginLocation"; 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { useNavigation } from '@react-navigation/native';
 
 import getCurrentLocation from "../utils";
@@ -9,10 +9,11 @@ export default function GeoLocationButton() {
     const navigation = useNavigation();
     
     const { setOriginLocation } = useContext(OriginLocationContext)
-    const [ initialRegion, setInitialRegion ] = useState(null);
 
     function handleLocationButtonPress () {
-        getCurrentLocation(setOriginLocation, setInitialRegion)
+        setOriginLocation({})
+        getCurrentLocation(setOriginLocation)
+
         navigation.navigate('Toilets Near You')
     }
 
