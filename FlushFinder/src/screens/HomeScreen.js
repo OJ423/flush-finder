@@ -1,5 +1,5 @@
 
-// import DropDownPicker from "react-native-dropdown-picker";
+import DropDownPicker from "react-native-dropdown-picker";
 import GeoLocationButton from "../components/GeoLocationButton";
 import React from "react";
 import {
@@ -8,62 +8,69 @@ import {
   StatusBar,
   Dimensions,
 } from "react-native";
-import { Block, Button, Icon, Text, theme } from "galio-framework";
-import { Ionicons } from "@expo/vector-icons";
+import { Block, Button, Icon, Text, theme,Switch } from "galio-framework";
+import FilterForm from "../components/FilterForm";
+import { useContext, useState } from "react";
+
+
+
 
 const { height, width } = Dimensions.get("screen");
 const backGroungImg = require("../../assets/HomeBackground.jpg");
 
-export default class Onboarding extends React.Component {
-  render() {
-    const { navigation } = this.props;
+export default function HomeScreen() {
+  const [isUnisexOnly, setIsUnisexOnly] = useState(false);
+  const [isAccessibleOnly, setIsAccessibleOnly] = useState(true);
+  const [hasChangingTable, setHasChangingTable] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-    return (
-      <Block flex style={styles.container}>
-        <StatusBar barStyle="light-content" />
-        <Block flex center>
-          <ImageBackground
-            source={backGroungImg}
-            style={{
-              height: height,
-              width: width,
-              marginTop: "-55%",
-              zIndex: 1,
-            }}
+  return (
+    <Block flex style={styles.container}>
+      <StatusBar barStyle="light-content" />
+      <Block flex center>
+        <ImageBackground
+          source={backGroungImg}
+          style={{
+            height: height,
+            width: width,
+            marginTop: "-55%",
+            zIndex: 1,
+          }}
           />
-        </Block>
-        <Block flex space="between" style={styles.padded}>
-          <Block flex space="around" style={{ zIndex: 2 }}>
+      </Block>
+      <Block flex space="between" style={styles.padded}>
+        <Block flex space="around" style={{ zIndex: 2 }}>
+          <Block>
             <Block>
-              <Block>
-                <Text color="white" size={60}>
-                  FlushFinder
-                </Text>
-              </Block>
-              <Text size={16} color="rgba(255,255,255,0.6)">
-                Find your nearest loo.
+              <Text color="white" size={60}>
+                FlushFinder
               </Text>
             </Block>
-            <Block row>
-              <Block flex={5}>
-                {/* <DropDownPicker /> */}
-              </Block>
-              <Block flex={1}>
-                <Button onlyIcon icon="direction" iconFamily="Entypo" iconSize={25} iconColor="#fff" style={{ width: 40, height: 40 }}>Use your current location</Button>
-              </Block>
+            <Text size={16} color="rgba(255,255,255,0.6)">
+              Find your nearest loo.
+            </Text>
+          </Block>
+          <Block row>
+            <Block flex={5}>
+              <Button>Placeholder for dropdown picker</Button>
             </Block>
-            <Block center>
-               <GeoLocationButton/>
-              <Button shadowless style={styles.button} onPress={() => {}}>
-                SUBMIT
-              </Button>
+            <Block flex={1}>
+             <GeoLocationButton/>
             </Block>
+          </Block>
+          <FilterForm isAccessibleOnly={isAccessibleOnly} setIsAccessibleOnly={setIsAccessibleOnly} hasChangingTable={hasChangingTable} setHasChangingTable={setHasChangingTable} isUnisexOnly={isUnisexOnly} setIsUnisexOnly={setIsUnisexOnly}/>
+          <Block center>
+            <Button shadowless style={styles.button} onPress={() => {console.log(isAccessibleOnly,isUnisexOnly,hasChangingTable)}}>
+              SUBMIT
+            </Button>
           </Block>
         </Block>
       </Block>
-    );
-  }
+    </Block>
+  );
 }
+
 
 const styles = StyleSheet.create({
   container: {
