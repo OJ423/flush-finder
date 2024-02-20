@@ -1,5 +1,13 @@
-import {createContext} from "react"
+import {createContext, useState} from "react"
 
-const ToiletResponse = createContext()
+export const ToiletResponseContext = createContext()
 
-export default ToiletResponse
+export const ToiletResponseProvider = ({children}) => {
+    const [toiletResponse, setToiletResponse] = useState([])
+
+    return (
+        <ToiletResponseContext.Provider value={{ toiletResponse, setToiletResponse}}>
+          {children}
+        </ToiletResponseContext.Provider>
+      );
+}
