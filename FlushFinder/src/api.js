@@ -1,11 +1,21 @@
 import axios from 'axios';
 
 export function fetchData(originLocation) {
-  const latitude= originLocation.latitude
-  const longitude= originLocation.longitude
   return axios
-    .get(`https://www.refugerestrooms.org/api/v1/restrooms/by_location?page=1&per_page=30&offset=0&unisex=true&lat=${latitude}&lng=${longitude}`)
+    .get(`https://www.refugerestrooms.org/api/v1/restrooms/by_location`, {
+      params: {
+        "page": 1,
+        "per_page": 30,
+        "offset": 0,
+        "lat": originLocation.latitude,
+        "lng": originLocation.longitude,
+        "ada": originLocation.ada,
+        "unisex": originLocation.unisex,
+        "changing_table": originLocation.changing_table
+      }
+    })
     .then((response) => {
       return response.data
     })
 }
+

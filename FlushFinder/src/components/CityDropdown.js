@@ -3,11 +3,10 @@ import { OriginLocationContext } from "../context/OriginLocation";
 import { View } from "react-native";
 import RNPickerSelect from 'react-native-picker-select';
 
-export default function CityDropdown() {
+export default function CityDropdown({setCityOriginLocation}) {
   
   const { originLocation, setOriginLocation } = useContext(OriginLocationContext);
   const [selectedValue, setSelectedValue] = useState(null)
-  const [cityOriginLocation, setCityOriginLocation] = useState(null)
 
   let placeholder = {
     label: 'Select a city',

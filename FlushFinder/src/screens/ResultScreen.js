@@ -13,6 +13,8 @@ export default function ResultScreen() {
     const { originLocation } = useContext(OriginLocationContext)
     const [ isLoading, setIsLoading ] = useState(true)
 
+    console.log(originLocation, "<<<< Results screen")
+
   useEffect(() => {
     setIsLoading(true)
     setToiletResponse(null)
@@ -28,10 +30,11 @@ export default function ResultScreen() {
     
   }, [originLocation]);
 
-
   return (
     <View>
       {isLoading? <View><ActivityIndicator size="large" color="blue"/></View> : <MapRender />}
     </View>
   );
 }
+
+

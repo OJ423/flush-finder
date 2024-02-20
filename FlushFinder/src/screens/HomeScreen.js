@@ -5,11 +5,14 @@ import {
   StyleSheet,
   StatusBar,
   Dimensions,
+  Alert,
 } from "react-native";
 import { Block, Button, Icon, Text, theme, Switch } from "galio-framework";
 import FilterForm from "../components/FilterForm";
 import * as SplashScreen from "expo-splash-screen";
 import CityDropdown from "../components/CityDropdown";
+import { useNavigation } from "@react-navigation/core";
+import { OriginLocationContext } from "../context/OriginLocation";
 
 const { height, width } = Dimensions.get("screen");
 const backGroungImg = require("../../assets/HomeBackground.jpg");
@@ -22,6 +25,10 @@ export default function HomeScreen() {
   const [hasChangingTable, setHasChangingTable] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [cityOriginLocation, setCityOriginLocation] = useState(null)
+  const {setOriginLocation} = useContext(OriginLocationContext)
+
+  const navigation = useNavigation();
 
   useEffect(() => {
     async function prepare() {
@@ -76,10 +83,10 @@ export default function HomeScreen() {
           </Block>
           <Block row>
             <Block flex={5}>
-              <CityDropdown />
+              <CityDropdown setCityOriginLocation={setCityOriginLocation}/>
             </Block>
             <Block flex={1}>
-              <GeoLocationButton />
+              <GeoLocationButton ada={isAccessibleOnly} unisex={isUnisexOnly} changing_table={hasChangingTable} />
             </Block>
           </Block>
           <FilterForm
@@ -95,7 +102,10 @@ export default function HomeScreen() {
               shadowless
               style={styles.button}
               onPress={() => {
-                console.log(isAccessibleOnly, isUnisexOnly, hasChangingTable);
+                if(cityOriginLocation){
+                  setOriginLocation({latitude: cityOriginLocation.latitude, longitude: cityOriginLocation.longitude, accessible: isAccessibleOnly, unisex: isUnisexOnly, changingTable: hasChangingTable})
+                  navigation.navigate('Toilets Near You', {isAccessibleOnly, isUnisexOnly, hasChangingTable})
+                }
               }}
             >
               SUBMIT

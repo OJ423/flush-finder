@@ -3,10 +3,9 @@ import { OriginLocationContext } from "../context/OriginLocation";
 import { useContext } from "react";
 import { useNavigation } from '@react-navigation/native';
 import { Block, Button, Icon, Text, theme } from "galio-framework";
-
 import getCurrentLocation from "../utils";
 
-export default function GeoLocationButton() {
+export default function GeoLocationButton({isAccessibleOnly, isUnisexOnly, hasChangingTable}) {
     const navigation = useNavigation();
     
     const { setOriginLocation } = useContext(OriginLocationContext)
