@@ -11,6 +11,7 @@ import {
 import { Block, Button, Icon, Text, theme,Switch } from "galio-framework";
 import FilterForm from "../components/FilterForm";
 import { useContext, useState } from "react";
+import CityDropdown from "../components/CityDropdown";
 
 
 
@@ -53,7 +54,7 @@ export default function HomeScreen() {
           </Block>
           <Block row>
             <Block flex={5}>
-              <Button>Placeholder for dropdown picker</Button>
+              <CityDropdown />
             </Block>
             <Block flex={1}>
              <GeoLocationButton/>
