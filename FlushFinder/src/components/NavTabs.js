@@ -38,7 +38,7 @@ export default function NavTabs() {
   }
   return(<NavigationContainer>
         <Stack.Navigator > 
-      <Stack.Screen name="FlushFinder" component={BottomTabNav} />
+      <Stack.Screen options={{headerShown: false}} name="FlushFinder" component={BottomTabNav} />
       <Stack.Screen name="Toilets Near You" component={ResultScreen} />
     </Stack.Navigator>
   </NavigationContainer>)
