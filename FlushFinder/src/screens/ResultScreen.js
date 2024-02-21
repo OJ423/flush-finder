@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { ActivityIndicator, StyleSheet } from "react-native";
+import { ActivityIndicator, StatusBar, StyleSheet } from "react-native";
 
 import { Block, Button } from "galio-framework";
 
@@ -54,8 +54,13 @@ export default function ResultScreen() {
   return (
     <>
       {noToilets ? (
+        <>
+        <StatusBar />
         <NoToiletResult />
+        </>
       ) : (
+        <>
+        <StatusBar />
         <Block flex style={styles.container}>
           {isLoading ? (
             <Block>
@@ -67,6 +72,7 @@ export default function ResultScreen() {
             <ListView setFullMap={setFullMap} />
           )}
         </Block>
+        </>
       )}
     </>
   );
