@@ -81,7 +81,6 @@ const styles = StyleSheet.create({
   mapButtonContainer: {
     flex: 1,
   },
-
   button: {
     width: 390,
   },
