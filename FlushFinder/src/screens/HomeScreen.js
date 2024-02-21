@@ -5,7 +5,6 @@ import {
   StyleSheet,
   StatusBar,
   Dimensions,
-  Alert,
 } from "react-native";
 import { Block, Button, Icon, Text, theme, Switch } from "galio-framework";
 import FilterForm from "../components/FilterForm";

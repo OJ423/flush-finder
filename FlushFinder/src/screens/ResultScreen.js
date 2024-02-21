@@ -9,6 +9,7 @@ import { OriginLocationContext } from "../context/OriginLocation";
 import MapRender from "../components/MapRender";
 import FullMapView from "../components/results-screen/FullMapView";
 import ResultsMap from "../components/results-screen/ResultsMap";
+import NoToiletResult from "../components/results-screen/NoToiletResult";
 
 import { fetchData } from "../api";
 import List from "../components/results-screen/List";
@@ -22,7 +23,8 @@ export default function ResultScreen() {
   );
   const { originLocation } = useContext(OriginLocationContext);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [noToilets, setNoToilets] = useState(false)
+  
   useEffect(() => {
     setIsLoading(true);
     setToiletResponse(null);
@@ -33,24 +35,37 @@ export default function ResultScreen() {
             setToiletResponse(response);
             setIsLoading(false);
           })
+          .then(() => {
+            const nearbyToilets = toiletResponse.map((toilet) => {
+              if(toilet.distance <= 10) {
+                return toilet
+              }
+            })
+            if(nearbyToilets.length > 0) setNoToilets(false)
+            else if (nearbyToilets.length < 1) {
+              setNoToilets(true)
+            }
+          })
           .catch((err) => {
             console.log(err);
           });
   }, [originLocation]);
-
-  return (
-    <Block flex style={styles.container}>
-      {isLoading ? (
-        <Block>
-          <ActivityIndicator size="large" color="blue" />
-        </Block>
-      ) : fullMap ? (
-        <FullMapView setFullMap={setFullMap} />
-      ) : ( 
-        <ListView setFullMap={setFullMap}/>
-      )}
-    </Block>
-  );
+  console.log(toiletResponse)
+  return (<>
+    {noToilets ? <NoToiletResult/> 
+    :
+      <Block flex style={styles.container}>
+        {isLoading ? (
+          <Block>
+            <ActivityIndicator size="large" color="blue" />
+          </Block>
+        ) : fullMap ? (
+          <FullMapView setFullMap={setFullMap} />
+        ) : ( 
+          <ListView setFullMap={setFullMap}/>
+        )}
+      </Block>
+    }</>);
 }
 
 const styles = StyleSheet.create({
