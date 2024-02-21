@@ -4,6 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../screens/HomeScreen'
 import ResultScreen from '../screens/ResultScreen'
 import About from '../screens/About'
+import FullMapView from './results-screen/FullMapView';
 import { OriginLocationContext } from '../context/OriginLocation';
 import React, {useContext} from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';

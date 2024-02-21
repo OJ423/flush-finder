@@ -1,7 +1,5 @@
 import * as Location from "expo-location";
 
-
-
 export default function getCurrentLocation(setOriginLocation, props){
 
     const getLocation = async () => {
