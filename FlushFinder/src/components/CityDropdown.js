@@ -119,6 +119,13 @@ export default function CityDropdown({setCityOriginLocation}) {
         onValueChange={(value) => {
           handleValueChange(value)
         }}
+        style={{
+          inputIOS: {
+            paddingTop: 16, 
+            paddingBottom: 16, 
+            paddingLeft: 16, 
+          }
+        }}
       />
     </View>
   )
