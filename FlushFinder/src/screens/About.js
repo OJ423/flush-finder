@@ -1,6 +1,6 @@
 import React from "react";
 import { View, ScrollView, StyleSheet, Image, SectionList } from "react-native";
-import { Text, Block, DeckSwiper } from 'galio-framework';
+import { Text, Block, DeckSwiper, theme } from 'galio-framework';
 
 const howToUse = [<View style={{ backgroundColor: '#B23AFC', height: 550, width: 350 }}>
 
@@ -16,8 +16,8 @@ export default function About() {
   return( 
   <ScrollView>
     <View style={styles.hero}>
-      <Text h1>About Flush Finder</Text>
-      <Text h4>Five members of North Coders November '23 cohort teamed up to build this convenient app.</Text>
+      <Text h1 style={{color:"white"}}>About Flush Finder</Text>
+      <Text h4 style={styles.h4}>Five members of North Coders November '23 cohort teamed up to build this convenient app.</Text>
     </View>
     <View style={styles.container}>
       <Text h2>Help When It's Needed</Text>
@@ -52,7 +52,7 @@ const styles = StyleSheet.create ({
   hero: {
     flex: 1,
     padding: 24,
-    backgroundColor: "tomato",
+    backgroundColor: "#e83e8c",
     color: "white",
     alignItems: "center",
     textAlign: "center",
@@ -65,13 +65,8 @@ const styles = StyleSheet.create ({
     color:"white",
     paddingBottom:30
   },
-  heroText: {
-    fontSize: 24,
-    textAlign:"center",
-    color: "white"
-  },
   container: {
-    padding: 10,
+    padding: 24,
     paddingTop: 100,
     paddingBottom: 100,
   },
@@ -87,7 +82,7 @@ const styles = StyleSheet.create ({
   item: {
     borderBottomColor:"gray",
     borderBottomWidth: 1,
-    padding: 20,
+    padding: 24,
     marginVertical: 8,
     borderRadius:5,
   },
@@ -95,9 +90,13 @@ const styles = StyleSheet.create ({
     fontSize: 24,
     paddingTop: 20,
     textAlign:"center",
-    color:"tomato",
+    color:"#e83e8c",
   },
   h5: {
-    color:"tomato"
+    color:"#e83e8c",
+  },
+  h4: {
+    padding:24,
+    color:"white"
   }
 })
