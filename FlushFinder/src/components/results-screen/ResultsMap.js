@@ -5,7 +5,7 @@ import MapRender from "../MapRender";
 
 export default function ResultsMap ({setFullMap}) {
     return (
-        <Block style={styles.mapButtonContainer}>
+        <Block style={styles.container}>
             <MapRender mapStyle={styles.resultsMap} />
 
             <Button
@@ -21,15 +21,17 @@ export default function ResultsMap ({setFullMap}) {
 }
 
 const styles = StyleSheet.create({
-    mapButtonContainer: {
-        flex: 1/2,
-      },
-    resultsMap: {
+  container: {
+      flex: 1,
+      alignItems: "center",
+   
+  },
+  resultsMap: {
       width: 390,
       height: 250,
-    },
-    button: {
-      width: 390,
-      justifyItems: "center"
-    },
-  });
+  },
+  button: {
+      width: 200,
+      marginTop: 20
+  },
+});

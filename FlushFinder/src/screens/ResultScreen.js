@@ -56,17 +56,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   mapButtonContainer: {
-    flex: 1/2,
+    flex: 1,
   },
-  resultsMap: {
-    width: 390,
-    height: 250,
-  },
-  fullMap: {
-    width: 390,
-    height: 700,
-    marginTop: 450
-    },
+ 
   button: {
     width: 390,
   },
