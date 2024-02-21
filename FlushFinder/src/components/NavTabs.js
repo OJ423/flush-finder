@@ -40,7 +40,7 @@ export default function NavTabs() {
   return(<NavigationContainer>
         <Stack.Navigator > 
       <Stack.Screen options={{headerShown: false}} name="FlushFinder" component={BottomTabNav} />
-      <Stack.Screen name="Toilets Near You" component={ResultScreen} />
+      <Stack.Screen options={{headerStyle: {backgroundColor: 'white'}, headerTintColor: 'black', headerTitleStyle: {fontWeight: 'bold'}}} name="Toilets Near You" component={ResultScreen} />
     </Stack.Navigator>
   </NavigationContainer>)
 }
