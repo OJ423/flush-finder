@@ -63,16 +63,19 @@ export default function HomeScreen() {
           style={{
             height: height,
             width: width,
-            marginTop: "-55%",
             zIndex: 1,
           }}
-        />
-      </Block>
-      <Block flex space="between" style={styles.padded}>
-        <Block flex space="around" style={{ zIndex: 2 }}>
+          imageStyle= {{
+            resizeMode: 'cover',
+            position: 'absolute',
+            bottom: 0,
+          }}
+        >
+      <Block flex middle  style={styles.padded}>
+        <Block flex style={{ zIndex: 2, justifyContent:"flex-end", marginBottom:150 }}>
           <Block>
             <Block>
-              <Text color="white" size={60}>
+              <Text color="white" size={50}>
                 FlushFinder
               </Text>
             </Block>
@@ -81,10 +84,10 @@ export default function HomeScreen() {
             </Text>
           </Block>
           <Block row>
-            <Block flex={5}>
+            <Block style={styles.rowGap} flex={5}>
               <CityDropdown setCityOriginLocation={setCityOriginLocation}/>
             </Block>
-            <Block flex={1}>
+            <Block style={styles.rowGap} flex={1}>
               <GeoLocationButton ada={isAccessibleOnly} unisex={isUnisexOnly} changing_table={hasChangingTable} />
             </Block>
           </Block>
@@ -96,7 +99,7 @@ export default function HomeScreen() {
             isUnisexOnly={isUnisexOnly}
             setIsUnisexOnly={setIsUnisexOnly}
           />
-          <Block center>
+          <Block style={styles.rowGap} center>
             <Button
               shadowless
               style={styles.button}
@@ -111,14 +114,19 @@ export default function HomeScreen() {
             </Button>
           </Block>
         </Block>
+        </Block>
+        </ImageBackground>
+        </Block>
       </Block>
-    </Block>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "black",
+  },
+  rowGap: {
+    marginTop:20,
   },
   padded: {
     paddingHorizontal: theme.SIZES.BASE * 2,
