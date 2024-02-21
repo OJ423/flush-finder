@@ -8,7 +8,7 @@ import { ToiletResponseContext } from "../context/ToiletResponse";
 const locationPin = require("../../assets/locationPin.png")
 const toiletPin = require("../../assets/toiletPin.png")
 
-export default function MapRender() {
+export default function MapRender({mapStyle}) {
   const [initialRegion, setInitialRegion] = useState({});
 
   const [isLoading, setIsLoading] = useState(true);
@@ -20,7 +20,7 @@ export default function MapRender() {
     setIsLoading(true);
     if (originLocation) {
       const newInitialRegion = {
-        latitude: originLocation.latitude + 0.0075,
+        latitude: originLocation.latitude,
         longitude: originLocation.longitude,
         latitudeDelta: 0.03,
         longitudeDelta: 0.03,
@@ -37,7 +37,7 @@ export default function MapRender() {
   ) : (
     <View style={styles.container}>
       {initialRegion && (
-        <MapView style={styles.map} initialRegion={initialRegion}>
+        <MapView style={mapStyle} initialRegion={initialRegion}>
           {originLocation && (
             <Marker
               coordinate={{
@@ -81,11 +81,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    paddingBottom: 30,
-    paddingTop: 60,
-  },
-  map: {
-    width: 350,
-    height: 400,
   },
 });
