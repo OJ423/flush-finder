@@ -2,7 +2,7 @@ import * as Location from "expo-location";
 
 
 
-export default function getCurrentLocation(setOriginLocation, setInitialRegion){
+export default function getCurrentLocation(setOriginLocation, props){
 
     const getLocation = async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -12,7 +12,7 @@ export default function getCurrentLocation(setOriginLocation, setInitialRegion){
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      setOriginLocation(location.coords);
+      setOriginLocation({latitude:location.coords.latitude, longitude: location.coords.longitude, ada: props.ada, unisex: props.unisex, changingTable:props.changing_table});
     };
   
     getLocation();

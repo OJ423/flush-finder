@@ -9,11 +9,9 @@ import MapRender from "../components/MapRender";
 import { fetchData } from "../api";
 
 export default function ResultScreen() {
-    const { toiletResponse, setToiletResponse } = useContext(ToiletResponseContext)
-    const { originLocation } = useContext(OriginLocationContext)
-    const [ isLoading, setIsLoading ] = useState(true)
-
-    console.log(originLocation, "<<<< Results screen")
+  const { toiletResponse, setToiletResponse } = useContext(ToiletResponseContext)
+  const { originLocation } = useContext(OriginLocationContext)
+  const [ isLoading, setIsLoading ] = useState(true)
 
   useEffect(() => {
     setIsLoading(true)
