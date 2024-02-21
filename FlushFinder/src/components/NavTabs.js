@@ -30,7 +30,7 @@ export default function NavTabs() {
               
               return <Ionicons name={iconName} size={size} color={color} />;
             },
-            tabBarActiveTintColor: 'tomato',
+            tabBarActiveTintColor: '#e83e8c',
             tabBarInactiveTintColor: 'gray',
           })}>
         <Tab.Screen name="Search" component={HomeScreen} />
