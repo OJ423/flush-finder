@@ -11,15 +11,17 @@ import FullMapView from "../components/results-screen/FullMapView";
 import ResultsMap from "../components/results-screen/ResultsMap";
 
 import { fetchData } from "../api";
+import List from "../components/results-screen/List";
+import ListView from "../components/results-screen/ListView";
 
 export default function ResultScreen() {
+  const [fullMap, setFullMap] = useState(false);
 
-  const [fullMap, setFullMap] = useState(false)
-
-  const { toiletResponse, setToiletResponse } = useContext(ToiletResponseContext)
-  const { originLocation } = useContext(OriginLocationContext)
-  const [ isLoading, setIsLoading ] = useState(true)
-
+  const { toiletResponse, setToiletResponse } = useContext(
+    ToiletResponseContext
+  );
+  const { originLocation } = useContext(OriginLocationContext);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
@@ -32,7 +34,7 @@ export default function ResultScreen() {
             setIsLoading(false);
           })
           .catch((err) => {
-            console.log(err, "Refuge api call");
+            console.log(err);
           });
   }, [originLocation]);
 
@@ -41,9 +43,11 @@ export default function ResultScreen() {
       {isLoading ? (
         <Block>
           <ActivityIndicator size="large" color="blue" />
-        </Block>) 
-        : 
-        ( fullMap ? <FullMapView setFullMap={setFullMap}/> : <ResultsMap setFullMap={setFullMap} />
+        </Block>
+      ) : fullMap ? (
+        <FullMapView setFullMap={setFullMap} />
+      ) : ( 
+        <ListView setFullMap={setFullMap}/>
       )}
     </Block>
   );
@@ -58,7 +62,7 @@ const styles = StyleSheet.create({
   mapButtonContainer: {
     flex: 1,
   },
- 
+
   button: {
     width: 390,
   },
