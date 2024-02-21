@@ -13,13 +13,13 @@ import ResultsMap from "../components/results-screen/ResultsMap";
 import { fetchData } from "../api";
 
 export default function ResultScreen() {
+
   const [fullMap, setFullMap] = useState(false)
 
-  const { toiletResponse, setToiletResponse } = useContext(
-    ToiletResponseContext
-  );
-  const { originLocation } = useContext(OriginLocationContext);
-  const [isLoading, setIsLoading] = useState(true);
+  const { toiletResponse, setToiletResponse } = useContext(ToiletResponseContext)
+  const { originLocation } = useContext(OriginLocationContext)
+  const [ isLoading, setIsLoading ] = useState(true)
+
 
   useEffect(() => {
     setIsLoading(true);
