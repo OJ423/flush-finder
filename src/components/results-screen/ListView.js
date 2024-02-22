@@ -1,12 +1,11 @@
-import { Block, DeckSwiper, theme, Text} from "galio-framework";
+import { Block } from "galio-framework";
 import ResultsMap from "./ResultsMap";
 import List from "./List";
-import { StyleSheet, View } from "react-native";
 
 export default function ListView({ setFullMap }) {
   return (
     <>
-      <Block style={styles.container} safe={true} top>
+      <Block safe={true} top>
         <Block  flex center>
           <ResultsMap setFullMap={setFullMap} />
         </Block>
@@ -18,8 +17,4 @@ export default function ListView({ setFullMap }) {
   );
 }
 
-const styles = StyleSheet.create({
-    container: {
-      marginTop:-20
-    }})
 

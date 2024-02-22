@@ -1,18 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { ActivityIndicator, StatusBar, StyleSheet } from "react-native";
 
-import { Block, Button } from "galio-framework";
+import { Block } from "galio-framework";
 
 import { ToiletResponseContext } from "../context/ToiletResponse";
 import { OriginLocationContext } from "../context/OriginLocation";
 
-import MapRender from "../components/MapRender";
 import FullMapView from "../components/results-screen/FullMapView";
-import ResultsMap from "../components/results-screen/ResultsMap";
 import NoToiletResult from "../components/results-screen/NoToiletResult";
 
 import { fetchData } from "../api";
-import List from "../components/results-screen/List";
 import ListView from "../components/results-screen/ListView";
 
 export default function ResultScreen() {
