@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   resultsContainer: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "flex-start",
   },
   mapButtonContainer: {
     flex: 1,

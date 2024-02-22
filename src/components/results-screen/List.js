@@ -31,14 +31,14 @@ export default function List() {
       const obj = {};
       obj.title = (
         <>
-          <Block flex >
-            <Block flex={2} space="around" card >
-              <Text>{name}</Text>
-            </Block>
+        <Block flex row style={styles.accordTitle}>
+          <Block left row style={styles.titleDivide}>
+            <Text style={styles.titleDivide}>{name.substring(0,25)}</Text>
           </Block>
-          <Block right flex={1} card middle space="around" style>
-            <Text>{distance.toFixed(2)} miles</Text>
+          <Block right flex={1} row middle space="around">
+            <Text muted>{distance.toFixed(2)} miles</Text>
           </Block>
+        </Block>
         </>
       );
       obj.content = (
@@ -130,37 +130,8 @@ export default function List() {
     }
   );
 
-  // function renderHeader(section, _, isActive) {
-  //   return (
-  //     <Block card style={_ === 0 ? styles.accordZero : styles.accordHeader}>
-  //       <Text style={styles.accordTitle}>{section.title}</Text>
-  //       <Icon
-  //         name={isActive ? "up" : "down"}
-  //         size={20}
-  //         color="#bbb"
-  //         family="AntDesign"
-  //       />
-  //     </Block>
-  //   );
-  // }
-
-  // function renderContent(section, _, isActive) {
-  //   return <View style={styles.accordBody}>{section.content}</View>;
-  // }
-
-  // function handleOnToggle() {
-  //   LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-  // }
-
-  // console.log(data)
   return (
-    // <AccordionList
-    //   list={data}
-    //   header={renderHeader}
-    //   body={renderContent}
-    //   onToggle={handleOnToggle}
-    // />
-    <Accordion dataArray={data} />
+    <Accordion dataArray={data} opened={null} />
   );
 }
 
@@ -189,6 +160,8 @@ const styles = StyleSheet.create({
   },
   accordTitle: {
     fontSize: 20,
+    borderBottomWidth:1,
+    paddingBottom:10,
   },
   accordBody: {
     padding: 12,
@@ -198,5 +171,9 @@ const styles = StyleSheet.create({
   },
   seperator: {
     height: 12,
+  },
+  titleDivide: {
+    marginRight:10,
+    textAlign:"left"
   },
 });
