@@ -7,20 +7,20 @@ export default function FilterForm ({isAccessibleOnly, setIsAccessibleOnly,hasCh
 
   return (
     <>
-      <Text muted color="white" style={{marginTop:20}}>Only show results with: </Text>
+      <Text muted color="white" style={{marginTop:20, marginBottom: 10}}>Only show results with: </Text>
     <Block row>
     <Block center flex={1}>
-  <Switch color="white"   value={isAccessibleOnly}
+  <Switch accessibilityLabel={`Accesssible ${isAccessibleOnly}`} aria-value="off" color="white"   value={isAccessibleOnly}
   onChange={() => setIsAccessibleOnly(!isAccessibleOnly)}/>
   <Text color="white">Accessible</Text>
     </Block>
     <Block  center flex={1}>
-    <Switch color="white"  value={isUnisexOnly}
+    <Switch accessibilityLabel={`Unisex ${isUnisexOnly}`} color="white"  value={isUnisexOnly}
   onChange={() => setIsUnisexOnly(!isUnisexOnly)}/>
   <Text color="white">Unisex</Text>
     </Block>
     <Block center flex={1}>
-  <Switch color="white"  value={hasChangingTable}
+  <Switch accessibilityLabel={`Changing table ${hasChangingTable}`} color="white"  value={hasChangingTable}
   onChange={() => setHasChangingTable(!hasChangingTable)}/>
   <Text color="white">Changing table</Text>
     </Block>
