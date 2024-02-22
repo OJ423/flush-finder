@@ -6,7 +6,7 @@ import { StyleSheet, View } from "react-native";
 export default function ListView({ setFullMap }) {
   return (
     <>
-      <Block style={styles.container} safe top>
+      <Block style={styles.container} safe={true} top>
         <Block  flex center>
           <ResultsMap setFullMap={setFullMap} />
         </Block>
@@ -20,6 +20,6 @@ export default function ListView({ setFullMap }) {
 
 const styles = StyleSheet.create({
     container: {
-    //   backgroundColor: "black",
+      marginTop:-20
     }})
 
