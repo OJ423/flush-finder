@@ -1,18 +1,10 @@
-import { Accordion, Icon, Block, Card, Text } from "galio-framework";
+import { Accordion, Icon, Block, Button, Text } from "galio-framework";
 import { useContext } from "react";
 import { ToiletResponseContext } from "../../context/ToiletResponse";
-import { AccordionList } from "accordion-collapse-react-native";
 import React from "react";
-import {
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  View,
-  Button,
-  Platform,
-  UIManager,
-  LayoutAnimation,
-} from "react-native";
+import { StyleSheet,Dimensions } from "react-native";
+
+const { height, width } = Dimensions.get("screen")
 
 export default function List() {
   const { toiletResponse } = useContext(ToiletResponseContext);
@@ -33,7 +25,7 @@ export default function List() {
         <>
         <Block flex row style={styles.accordTitle}>
           <Block left row style={styles.titleDivide}>
-            <Text style={styles.titleDivide}>{name.substring(0,25)}</Text>
+            <Text style={styles.titleDivide}>{name.substring(0,33)}</Text>
           </Block>
           <Block right flex={1} row middle space="around">
             <Text muted>{distance.toFixed(2)} miles</Text>
@@ -43,86 +35,87 @@ export default function List() {
       );
       obj.content = (
         <>
-          <Block>
+          <Block safe>
+            <Text muted>{name}</Text>
             <Text>Address: {street}</Text>
-            <Text>
+            {/* <Text style={{ flexWrap: 'wrap' }}>
               Direction:{" "}
               {(directions === null) | (directions === "") ? "N/A" : directions}
-            </Text>
+            </Text> */}
             <Text>
               Unisex:{" "}
               {unisex === true ? (
                 <>
-                  <Text>Yes</Text>
                   <Icon
                     name={"check-circle"}
                     size={15}
                     color="#3CB043"
                     family="Feather"
-                  />
+                    />
+                  <Text muted> Yes</Text>
                 </>
               ) : (
                 <>
-                  <Text>No</Text>
                   <Icon
-                    name={"circle"}
+                    name={"thumbs-down"}
                     size={15}
-                    color="#bbb"
+                    color="tomato"
                     family="Feather"
-                  />
+                    />
+                  <Text muted> No</Text>
                 </>
               )}{" "}
             </Text>
             <Text>
-              Accessiblity-friendly:
+              Accessiblity-friendly:{" "} 
               {accessible === true ? (
                 <>
-                  <Text>Yes</Text>
                   <Icon
                     name={"check-circle"}
                     size={15}
                     color="#3CB043"
                     family="Feather"
-                  />
+                    />
+                  <Text muted>Yes</Text>
                 </>
               ) : (
                 <>
-                  <Text>No</Text>
                   <Icon
-                    name={"circle"}
+                    name={"thumbs-down"}
                     size={15}
-                    color="#bbb"
+                    color="tomato"
                     family="Feather"
-                  />
+                    />
+                  <Text muted> No</Text>
                 </>
               )}{" "}
             </Text>
             <Text>
-              Has changing table:
+              Has changing table:{" "}
               {changing_table === true ? (
                 <>
-                  <Text>Yes</Text>
                   <Icon
                     name={"check-circle"}
                     size={15}
                     color="#3CB043"
                     family="Feather"
-                  />
+                    />
+                  <Text muted> Yes</Text>
                 </>
               ) : (
                 <>
-                  <Text>No</Text>
                   <Icon
-                    name={"circle"}
+                    name={"thumbs-down"}
                     size={15}
-                    color="#bbb"
+                    color="tomato"
                     family="Feather"
-                  />
+                    />
+                  <Text muted> No</Text>
                 </>
-              )}{" "}
+              )}
             </Text>
+          <Button title="See more..." >MORE INFO</Button>
           </Block>
-          <Button title="See more..." />
         </>
       );
 
@@ -130,8 +123,30 @@ export default function List() {
     }
   );
 
+const customListStyle = {
+  borderRadius: 8,
+  padding: 10,
+};
+
+const customHeaderStyle = {
+  width:"100%",
+  borderBottomWidth:1,
+  borderBottomColor:"lightgrey"
+}
+
+const customContentStyle = {
+  backgroundColor: '#f3f3f3',
+  padding:20,
+  flexWrap:"wrap",
+}
+
+const customAccordionStyle = {
+  width:width - 20,
+  height:height / 2
+}
+
   return (
-    <Accordion dataArray={data} opened={null} />
+    <Accordion dataArray={data} opened={null} style={customAccordionStyle} listStyle={customListStyle} headerStyle={customHeaderStyle} contentStyle={customContentStyle} />
   );
 }
 
@@ -160,8 +175,6 @@ const styles = StyleSheet.create({
   },
   accordTitle: {
     fontSize: 20,
-    borderBottomWidth:1,
-    paddingBottom:10,
   },
   accordBody: {
     padding: 12,
