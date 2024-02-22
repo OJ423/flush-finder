@@ -5,7 +5,7 @@ export function fetchData(originLocation) {
     .get(`https://www.refugerestrooms.org/api/v1/restrooms/by_location`, {
       params: {
         "page": 1,
-        "per_page": 30,
+        "per_page": 50,
         "offset": 0,
         "lat": originLocation.latitude,
         "lng": originLocation.longitude,

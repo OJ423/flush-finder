@@ -105,10 +105,9 @@ export default function CityDropdown({setCityOriginLocation}) {
 
   const handleValueChange = (value) => {
     if (value) {
-    setSelectedValue(value)
-    const selectedCityData = cities.filter((city) => city.name === value)
-    setCityOriginLocation(selectedCityData.length ?{latitude:selectedCityData[0].latitude, longitude: selectedCityData[0].longitude} : null)
-  
+      setSelectedValue(value)
+      const selectedCityData = cities.filter((city) => city.name === value)
+      setCityOriginLocation(selectedCityData.length ?{latitude:selectedCityData[0].latitude, longitude: selectedCityData[0].longitude} : null)
     }
   }
   
@@ -119,6 +118,13 @@ export default function CityDropdown({setCityOriginLocation}) {
         items={options}
         onValueChange={(value) => {
           handleValueChange(value)
+        }}
+        style={{
+          inputIOS: {
+            paddingTop: 16, 
+            paddingBottom: 16, 
+            paddingLeft: 16, 
+          }
         }}
       />
     </View>

@@ -30,17 +30,19 @@ export default function NavTabs() {
               
               return <Ionicons name={iconName} size={size} color={color} />;
             },
-            tabBarActiveTintColor: 'tomato',
+            tabBarActiveTintColor: '#e83e8c',
             tabBarInactiveTintColor: 'gray',
           })}>
         <Tab.Screen name="Search" component={HomeScreen} />
         <Tab.Screen name="About" component={About} />
       </Tab.Navigator>
   }
-  return(<NavigationContainer>
-        <Stack.Navigator > 
-      <Stack.Screen options={{headerShown: false}} name="FlushFinder" component={BottomTabNav} />
-      <Stack.Screen name="Toilets Near You" component={ResultScreen} />
-    </Stack.Navigator>
-  </NavigationContainer>)
+  return(
+    <NavigationContainer>
+          <Stack.Navigator > 
+        <Stack.Screen options={{headerShown: false}} name="FlushFinder" component={BottomTabNav} />
+        <Stack.Screen options={{headerStyle: {backgroundColor: '#E83E8C'}, headerTintColor: '#fff', headerTitleStyle: {fontWeight: 'bold'},}} name="Toilets Near You" component={ResultScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }

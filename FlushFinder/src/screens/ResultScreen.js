@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { ActivityIndicator, StyleSheet } from "react-native";
+import { ActivityIndicator, StatusBar, StyleSheet } from "react-native";
 
 import { Block, Button } from "galio-framework";
 
@@ -9,6 +9,7 @@ import { OriginLocationContext } from "../context/OriginLocation";
 import MapRender from "../components/MapRender";
 import FullMapView from "../components/results-screen/FullMapView";
 import ResultsMap from "../components/results-screen/ResultsMap";
+import NoToiletResult from "../components/results-screen/NoToiletResult";
 
 import { fetchData } from "../api";
 import List from "../components/results-screen/List";
@@ -22,16 +23,28 @@ export default function ResultScreen() {
   );
   const { originLocation } = useContext(OriginLocationContext);
   const [isLoading, setIsLoading] = useState(true);
+  const [noToilets, setNoToilets] = useState(false);
 
   useEffect(() => {
+    setNoToilets(false);
     setIsLoading(true);
     setToiletResponse(null);
-    !originLocation
+    !Object.keys(originLocation).length
       ? null
       : fetchData(originLocation)
           .then((response) => {
-            setToiletResponse(response);
-            setIsLoading(false);
+            const nearbyToilets = response.filter((toilet) => {
+              if(toilet.distance <= 10) {
+                return toilet
+              }
+            })
+            if (nearbyToilets.length < 1) {
+              setNoToilets(true);
+            } else {
+              setToiletResponse(nearbyToilets);
+              setIsLoading(false);
+              setNoToilets(false);
+            }
           })
           .catch((err) => {
             console.log(err);
@@ -39,17 +52,29 @@ export default function ResultScreen() {
   }, [originLocation]);
 
   return (
-    <Block flex style={styles.container}>
-      {isLoading ? (
-        <Block>
-          <ActivityIndicator size="large" color="blue" />
+    <>
+      {noToilets ? (
+        <>
+        <StatusBar />
+        <NoToiletResult />
+        </>
+      ) : (
+        <>
+        <StatusBar />
+        <Block flex style={styles.container}>
+          {isLoading ? (
+            <Block>
+              <ActivityIndicator size="large" color="blue" />
+            </Block>
+          ) : fullMap ? (
+            <FullMapView setFullMap={setFullMap} />
+          ) : (
+            <ListView setFullMap={setFullMap} />
+          )}
         </Block>
-      ) : fullMap ? (
-        <FullMapView setFullMap={setFullMap} />
-      ) : ( 
-        <ListView setFullMap={setFullMap}/>
+        </>
       )}
-    </Block>
+    </>
   );
 }
 
@@ -62,7 +87,6 @@ const styles = StyleSheet.create({
   mapButtonContainer: {
     flex: 1,
   },
-
   button: {
     width: 390,
   },
