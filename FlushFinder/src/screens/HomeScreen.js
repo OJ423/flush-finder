@@ -56,7 +56,7 @@ export default function HomeScreen() {
 
   return (
     <Block flex style={styles.container} onLayout={onLayoutRootView}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="light-content" />
       <Block flex center>
         <ImageBackground
           source={backGroungImg}
