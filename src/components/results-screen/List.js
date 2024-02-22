@@ -23,12 +23,12 @@ export default function List() {
       const obj = {};
       obj.title = (
         <>
-        <Block flex row style={styles.accordTitle}>
-          <Block left row style={styles.titleDivide}>
-            <Text style={styles.titleDivide}>{name.substring(0,33)}</Text>
+        <Block flex={4}  width={width-80}row style={styles.accordTitle}>
+          <Block flex={2} left row style={styles.titleDivide}>
+            <Text style={styles.titleDivide}>{name.substring(0,30)}</Text>
           </Block>
           <Block right flex={1} row middle space="around">
-            <Text muted>{distance.toFixed(2)} miles</Text>
+            <Text muted style={{textAlign:"right"}}>{distance.toFixed(2)} miles</Text>
           </Block>
         </Block>
         </>
@@ -187,6 +187,7 @@ const styles = StyleSheet.create({
   },
   titleDivide: {
     marginRight:10,
-    textAlign:"left"
+    textAlign:"left",
+    width:width,
   },
 });

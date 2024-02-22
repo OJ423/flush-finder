@@ -8,7 +8,7 @@ const { height, width } = Dimensions.get("screen")
 export default function FullMapView({setFullMap}) {
     return(
         <Block style={styles.container}>
-            <MapRender mapStyle={styles.fullMap} />
+            <MapRender mapStyle={styles.fullMap}/>
 
             <Button onlyIcon icon="shrink" iconFamily="antdesign" iconSize={30} iconColor="#fff"
               style={styles.button}
@@ -23,6 +23,8 @@ export default function FullMapView({setFullMap}) {
     )
 }
 
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -32,13 +34,12 @@ const styles = StyleSheet.create({
   fullMap: {
     width: width,
     height: height,
-    marginTop: 20
   },
   button: {
     width: 40,
     height: 40,
     position: "absolute",
-    top: 40,
+    top: 20,
     left:20,
   },
 });
