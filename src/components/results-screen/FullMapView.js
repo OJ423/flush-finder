@@ -10,7 +10,7 @@ export default function FullMapView({setFullMap}) {
         <Block style={styles.container}>
             <MapRender mapStyle={styles.fullMap}/>
 
-            <Button onlyIcon icon="shrink" iconFamily="antdesign" iconSize={30} iconColor="#fff"
+            <Button accessibilityLabel="List View button" onlyIcon icon="shrink" iconFamily="antdesign" iconSize={30} iconColor="#fff"
               style={styles.button}
               shadowless
               onPress={() => {

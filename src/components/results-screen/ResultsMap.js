@@ -8,7 +8,7 @@ export default function ResultsMap ({setFullMap}) {
         <Block flex center>
             <MapRender mapStyle={styles.resultsMap} />
 
-            <Button onlyIcon icon="arrowsalt" iconFamily="antdesign" iconSize={30} iconColor="#fff"
+            <Button accessibilityLabel="full screen map view button" onlyIcon icon="arrowsalt" iconFamily="antdesign" iconSize={30} iconColor="#fff"
             style={styles.button}
             onPress={() => {
                 setFullMap(true);
