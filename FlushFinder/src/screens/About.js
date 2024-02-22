@@ -23,7 +23,7 @@ export default function About() {
       <Text h2>Help When It's Needed</Text>
       <Text p>The app is built to help people find a safe, clean, and convenient toilet when they need it most. With help from Refuge and the Safe2Pee database, the application aims to provide a quick and easy solution to find a toilet near you.</Text>
     </View>
-    <Image source={require('../../assets/empty-toiletroll.jpg')} alt="An empty toilet roll with don't panic written on the cardboard tube."></Image>
+    <Image source={require('../../assets/empty-toiletroll.jpg')} style={{width:"100%"}} alt="An empty toilet roll with don't panic written on the cardboard tube."></Image>
     <View style={styles.container}>
       <Text style={styles.textTitle}>How To Use Flush Finder</Text>
       <Block card space="around" style={{padding:20, marginTop:20, backgroundColor:"#ffffff"}}>
