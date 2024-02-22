@@ -33,7 +33,7 @@ export default function ResultScreen() {
       ? null
       : fetchData(originLocation)
           .then((response) => {
-            const nearbyToilets = response.map((toilet) => {
+            const nearbyToilets = response.filter((toilet) => {
               if(toilet.distance <= 10) {
                 return toilet
               }
