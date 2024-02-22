@@ -5,12 +5,11 @@ import MapRender from "../MapRender";
 
 export default function ResultsMap ({setFullMap}) {
     return (
-        <Block style={styles.container}>
+        <Block flex center>
             <MapRender mapStyle={styles.resultsMap} />
 
             <Button
             style={styles.button}
-            shadowless
             onPress={() => {
                 setFullMap(true);
             }}
@@ -21,11 +20,6 @@ export default function ResultsMap ({setFullMap}) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-      flex: 1,
-      alignItems: "center",
-   
-  },
   resultsMap: {
       width: 390,
       height: 250,
