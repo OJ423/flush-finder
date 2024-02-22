@@ -1,14 +1,14 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { Block, Button } from "galio-framework";
 
 import MapRender from "../MapRender";
-
+const { height, width } = Dimensions.get("screen")
 export default function ResultsMap ({setFullMap}) {
     return (
         <Block flex center>
             <MapRender mapStyle={styles.resultsMap} />
 
-            <Button
+            <Button onlyIcon icon="arrowsalt" iconFamily="antdesign" iconSize={30} iconColor="#fff"
             style={styles.button}
             onPress={() => {
                 setFullMap(true);
@@ -21,11 +21,14 @@ export default function ResultsMap ({setFullMap}) {
 
 const styles = StyleSheet.create({
   resultsMap: {
-      width: 390,
-      height: 250,
+      width: width,
+      height: height / 1.5,
   },
   button: {
-      width: 200,
-      marginTop: 20
+    width: 40,
+    height: 40,
+    position: "absolute",
+    top: 40,
+    left:20,
   },
 });
