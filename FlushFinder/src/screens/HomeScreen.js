@@ -82,7 +82,7 @@ export default function HomeScreen() {
             </Text>
           </Block>
           <Block row>
-            <Block flex={5}>
+            <Block safe card flex={5}>
               <CityDropdown setCityOriginLocation={setCityOriginLocation}/>
             </Block>
             <Block flex={1}>
