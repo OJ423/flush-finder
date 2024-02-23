@@ -35,7 +35,7 @@ export default function List() {
       );
       obj.content = (
         <>
-          <Block safe>
+          <Block style={{padding:20}}>
             <Text muted>{name}</Text>
             <Text>Address: {street}</Text>
             {/* <Text style={{ flexWrap: 'wrap' }}>
@@ -136,13 +136,12 @@ const customHeaderStyle = {
 
 const customContentStyle = {
   backgroundColor: '#f3f3f3',
-  padding:20,
   flexWrap:"wrap",
 }
 
 const customAccordionStyle = {
   width:width - 20,
-  height:height / 2
+  height:height / 2,
 }
 
   return (
