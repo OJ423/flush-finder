@@ -7,9 +7,10 @@ import { useNavigation } from "@react-navigation/core";
 
 const { height, width } = Dimensions.get("screen")
 
-export default function List() {
+export default function List({ setSelectedToilet }) {
   const { toiletResponse } = useContext(ToiletResponseContext);
   const navigation = useNavigation();
+
   const handleToiletView = () => {
     navigation.navigate('ToiletView')
   }
@@ -18,12 +19,17 @@ export default function List() {
       accessible,
       changing_table,
       city,
-      directions,
       distance,
       name,
       street,
       unisex,
-      state,
+      latitude,
+      longitude,
+      id,
+      votes,
+      comment_count,
+      comment
+
     }) => {
       const obj = {};
       obj.title = (
@@ -123,6 +129,21 @@ export default function List() {
           </Block>
         </>
       );
+      obj.singleToiletData = [{
+        accessible,
+        changing_table,
+        city,
+        distance,
+        name,
+        street,
+        unisex,
+        latitude,
+        longitude,
+        id,
+        votes,
+        comment_count,
+        comment
+      }]
 
       return obj;
     }
@@ -149,8 +170,12 @@ const customAccordionStyle = {
   height:height / 2,
 }
 
+function onOpenHandler(value) {
+  setSelectedToilet(value.singleToiletData)
+ }
+
   return (
-    <Accordion dataArray={data} opened={null} style={customAccordionStyle} listStyle={customListStyle} headerStyle={customHeaderStyle} contentStyle={customContentStyle} />
+    <Accordion onAccordionOpen={onOpenHandler} dataArray={data} opened={null} style={customAccordionStyle} listStyle={customListStyle} headerStyle={customHeaderStyle} contentStyle={customContentStyle} />
   );
 }
 

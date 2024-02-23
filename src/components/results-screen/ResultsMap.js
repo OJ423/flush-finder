@@ -3,11 +3,10 @@ import { Block, Button } from "galio-framework";
 
 import MapRender from "../MapRender";
 const { height, width } = Dimensions.get("screen")
-export default function ResultsMap ({setFullMap}) {
+export default function ResultsMap ({setFullMap, initialRegion, setInitialRegion, selectedToilet}) {
     return (
         <Block flex center>
-            <MapRender mapStyle={styles.resultsMap} />
-
+            <MapRender mapStyle={styles.resultsMap} selectedToilet= {selectedToilet}/>
             <Button accessibilityLabel="full screen map view button" onlyIcon icon="arrowsalt" iconFamily="antdesign" iconSize={30} iconColor="#fff"
             style={styles.button}
             onPress={() => {
