@@ -3,11 +3,16 @@ import { useContext } from "react";
 import { ToiletResponseContext } from "../../context/ToiletResponse";
 import React from "react";
 import { StyleSheet,Dimensions } from "react-native";
+import { useNavigation } from "@react-navigation/core";
 
 const { height, width } = Dimensions.get("screen")
 
 export default function List() {
   const { toiletResponse } = useContext(ToiletResponseContext);
+  const navigation = useNavigation();
+  const handleToiletView = () => {
+    navigation.navigate('ToiletView')
+  }
   const data = toiletResponse.map(
     ({
       accessible,
@@ -114,7 +119,7 @@ export default function List() {
                 </>
               )}
             </Text>
-          <Button title="See more..." >MORE INFO</Button>
+          <Button title="See more..." onPress={handleToiletView} >MORE INFO</Button>
           </Block>
         </>
       );
