@@ -9,15 +9,13 @@ import { OriginLocationContext } from "../context/OriginLocation";
 import FullMapView from "../components/results-screen/FullMapView";
 import NoToiletResult from "../components/results-screen/NoToiletResult";
 
-import { fetchData } from "../api";
+import { fetchCityToilets, fetchData } from "../api";
 import ListView from "../components/results-screen/ListView";
 
 export default function ResultScreen() {
   const [fullMap, setFullMap] = useState(false);
 
-  const { toiletResponse, setToiletResponse } = useContext(
-    ToiletResponseContext
-  );
+  const { toiletResponse, setToiletResponse } = useContext(ToiletResponseContext);
   const { originLocation } = useContext(OriginLocationContext);
   const [isLoading, setIsLoading] = useState(true);
   const [noToilets, setNoToilets] = useState(false);
@@ -25,29 +23,55 @@ export default function ResultScreen() {
   useEffect(() => {
     setNoToilets(false);
     setIsLoading(true);
-    setToiletResponse(null);
+    // setToiletResponse(null);
+    if(originLocation.city === undefined) {
+      console.log("Should not be getting through here")
     !Object.keys(originLocation).length
       ? null
       : fetchData(originLocation)
-          .then((response) => {
-            const nearbyToilets = response.filter((toilet) => {
-              if(toilet.distance <= 10) {
-                return toilet
-              }
-            })
-            if (nearbyToilets.length < 1) {
-              setNoToilets(true);
-            } else {
-              setToiletResponse(nearbyToilets);
-              setIsLoading(false);
-              setNoToilets(false);
+        .then((response) => {
+          const nearbyToilets = response.filter((toilet) => {
+            if(toilet.distance <= 10) {
+              return toilet
             }
           })
-          .catch((err) => {
-            console.log(err);
-          });
+          if (nearbyToilets.length < 1) {
+            setNoToilets(true);
+          } else {
+            setToiletResponse(nearbyToilets);
+            setIsLoading(false);
+            setNoToilets(false);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    else {
+      !Object.keys(originLocation).length
+      ? null
+      :
+      fetchCityToilets(originLocation)
+      .then((toiletData) => {
+        const cleanedData = toiletData.map((toilet) => {
+          toilet.id = toilet._id
+          delete toilet._id
+          return toilet
+        })
+        if (cleanedData.length < 1) {
+          setNoToilets(true);
+        } else {
+          setToiletResponse(cleanedData);
+          setIsLoading(false);
+          setNoToilets(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    }
   }, [originLocation]);
-
+  
   return (
     <>
       {noToilets ? (
