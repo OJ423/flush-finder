@@ -95,7 +95,6 @@ export default function MapRender({ mapStyle, selectedToilet }) {
                 >
                   <Image source={toiletPin} style={{ height: 30, width: 30 }} />
                 </Marker>
-                </>
               ))}
         </MapView>
       )}
