@@ -5,10 +5,10 @@ import MapRender from "../MapRender";
 
 const { height, width } = Dimensions.get("screen")
 
-export default function FullMapView({setFullMap}) {
+export default function FullMapView({setFullMap, initialRegion, setInitialRegion}) {
     return(
         <Block style={styles.container}>
-            <MapRender mapStyle={styles.fullMap}/>
+            <MapRender mapStyle={styles.fullMap} />
 
             <Button accessibilityLabel="List View button" onlyIcon icon="shrink" iconFamily="antdesign" iconSize={30} iconColor="#fff"
               style={styles.button}

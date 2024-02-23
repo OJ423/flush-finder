@@ -1,25 +1,32 @@
 import { useState, useContext, useEffect } from "react";
-import { View, StyleSheet, ActivityIndicator, Image, Dimensions } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ActivityIndicator,
+  Image,
+  Dimensions,
+} from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
 import { OriginLocationContext } from "../context/OriginLocation";
 import { ToiletResponseContext } from "../context/ToiletResponse";
 
-const locationPin = require("../../assets/locationPin.png")
-const toiletPin = require("../../assets/toiletPin.png")
+const locationPin = require("../../assets/locationPin.png");
+const toiletPin = require("../../assets/toiletPin.png");
 
+const { height, width } = Dimensions.get("screen");
 
-const { height, width } = Dimensions.get("screen")
-
-export default function MapRender({mapStyle}) {
+export default function MapRender({ mapStyle, selectedToilet }) {
+  
   const [initialRegion, setInitialRegion] = useState({});
   const [isLoading, setIsLoading] = useState(true);
+
   const { originLocation } = useContext(OriginLocationContext);
   const { toiletResponse, setToiletResponse } = useContext(ToiletResponseContext);
 
   useEffect(() => {
     setIsLoading(true);
-    if (originLocation) {
+    if (originLocation && !selectedToilet) {
       const newInitialRegion = {
         latitude: originLocation.latitude,
         longitude: originLocation.longitude,
@@ -28,9 +35,19 @@ export default function MapRender({mapStyle}) {
       };
       setInitialRegion(newInitialRegion);
       setIsLoading(false);
+    } else {
+      const newInitialRegion = {
+        latitude: selectedToilet[0].latitude,
+        longitude: selectedToilet[0].longitude,
+        latitudeDelta: 0.01,
+        longitudeDelta: 0.01,
+      };
+      setInitialRegion(newInitialRegion);
+      setIsLoading(false);
     }
-  }, [originLocation]);
-  
+
+  }, [originLocation, selectedToilet]);
+
   return isLoading ? (
     <View>
       <ActivityIndicator size="large" color="blue" />
@@ -38,26 +55,33 @@ export default function MapRender({mapStyle}) {
   ) : (
     <View style={styles.container}>
       {initialRegion && (
-        <MapView style={mapStyle} customMapStyle={customMapStyle} initialRegion={initialRegion}>
+        <MapView
+          style={mapStyle}
+          customMapStyle={customMapStyle}
+          initialRegion={initialRegion}
+        >
           {originLocation && (
             <Marker
               coordinate={{
                 latitude: originLocation.latitude,
                 longitude: originLocation.longitude,
               }}
-              style={{zIndex: 1000}}
+              style={{ zIndex: 1000 }}
               title="Your Location"
             >
-                <Image source={locationPin} style={{height: 100, width:100, zIndex: 1000}} />
+              <Image
+                source={locationPin}
+                style={{ height: 100, width: 100, zIndex: 1000 }}
+              />
             </Marker>
           )}
           {!toiletResponse
             ? null
             : toiletResponse.map((toilet) => (
-              <>
-              <Marker
-                pinColor={'blue'}
-                  key={toilet.id} 
+                <Marker
+                  pinColor={"blue"}
+                  key={toilet.id}
+
                   draggable
                   coordinate={{
                     latitude: toilet.latitude,
@@ -69,7 +93,7 @@ export default function MapRender({mapStyle}) {
                   title={toilet.name}
                   description={toilet.comment}
                 >
-                  <Image source={toiletPin} style={{height: 30, width:30}} />
+                  <Image source={toiletPin} style={{ height: 30, width: 30 }} />
                 </Marker>
                 </>
               ))}
@@ -81,165 +105,165 @@ export default function MapRender({mapStyle}) {
 
 const customMapStyle = [
   {
-    "elementType": "geometry",
-    "stylers": [
+    elementType: "geometry",
+    stylers: [
       {
-        "color": "#242f3e"
-      }
-    ]
+        color: "#242f3e",
+      },
+    ],
   },
   {
-    "elementType": "labels.text.fill",
-    "stylers": [
+    elementType: "labels.text.fill",
+    stylers: [
       {
-        "color": "#746855"
-      }
-    ]
+        color: "#746855",
+      },
+    ],
   },
   {
-    "elementType": "labels.text.stroke",
-    "stylers": [
+    elementType: "labels.text.stroke",
+    stylers: [
       {
-        "color": "#242f3e"
-      }
-    ]
+        color: "#242f3e",
+      },
+    ],
   },
   {
-    "featureType": "administrative.locality",
-    "elementType": "labels.text.fill",
-    "stylers": [
+    featureType: "administrative.locality",
+    elementType: "labels.text.fill",
+    stylers: [
       {
-        "color": "#d59563"
-      }
-    ]
+        color: "#d59563",
+      },
+    ],
   },
   {
-    "featureType": "poi",
-    "elementType": "labels.text.fill",
-    "stylers": [
+    featureType: "poi",
+    elementType: "labels.text.fill",
+    stylers: [
       {
-        "color": "#d59563"
-      }
-    ]
+        color: "#d59563",
+      },
+    ],
   },
   {
-    "featureType": "poi.park",
-    "elementType": "geometry",
-    "stylers": [
+    featureType: "poi.park",
+    elementType: "geometry",
+    stylers: [
       {
-        "color": "#263c3f"
-      }
-    ]
+        color: "#263c3f",
+      },
+    ],
   },
   {
-    "featureType": "poi.park",
-    "elementType": "labels.text.fill",
-    "stylers": [
+    featureType: "poi.park",
+    elementType: "labels.text.fill",
+    stylers: [
       {
-        "color": "#6b9a76"
-      }
-    ]
+        color: "#6b9a76",
+      },
+    ],
   },
   {
-    "featureType": "road",
-    "elementType": "geometry",
-    "stylers": [
+    featureType: "road",
+    elementType: "geometry",
+    stylers: [
       {
-        "color": "#38414e"
-      }
-    ]
+        color: "#38414e",
+      },
+    ],
   },
   {
-    "featureType": "road",
-    "elementType": "geometry.stroke",
-    "stylers": [
+    featureType: "road",
+    elementType: "geometry.stroke",
+    stylers: [
       {
-        "color": "#212a37"
-      }
-    ]
+        color: "#212a37",
+      },
+    ],
   },
   {
-    "featureType": "road",
-    "elementType": "labels.text.fill",
-    "stylers": [
+    featureType: "road",
+    elementType: "labels.text.fill",
+    stylers: [
       {
-        "color": "#9ca5b3"
-      }
-    ]
+        color: "#9ca5b3",
+      },
+    ],
   },
   {
-    "featureType": "road.highway",
-    "elementType": "geometry",
-    "stylers": [
+    featureType: "road.highway",
+    elementType: "geometry",
+    stylers: [
       {
-        "color": "#746855"
-      }
-    ]
+        color: "#746855",
+      },
+    ],
   },
   {
-    "featureType": "road.highway",
-    "elementType": "geometry.stroke",
-    "stylers": [
+    featureType: "road.highway",
+    elementType: "geometry.stroke",
+    stylers: [
       {
-        "color": "#1f2835"
-      }
-    ]
+        color: "#1f2835",
+      },
+    ],
   },
   {
-    "featureType": "road.highway",
-    "elementType": "labels.text.fill",
-    "stylers": [
+    featureType: "road.highway",
+    elementType: "labels.text.fill",
+    stylers: [
       {
-        "color": "#f3d19c"
-      }
-    ]
+        color: "#f3d19c",
+      },
+    ],
   },
   {
-    "featureType": "transit",
-    "elementType": "geometry",
-    "stylers": [
+    featureType: "transit",
+    elementType: "geometry",
+    stylers: [
       {
-        "color": "#2f3948"
-      }
-    ]
+        color: "#2f3948",
+      },
+    ],
   },
   {
-    "featureType": "transit.station",
-    "elementType": "labels.text.fill",
-    "stylers": [
+    featureType: "transit.station",
+    elementType: "labels.text.fill",
+    stylers: [
       {
-        "color": "#d59563"
-      }
-    ]
+        color: "#d59563",
+      },
+    ],
   },
   {
-    "featureType": "water",
-    "elementType": "geometry",
-    "stylers": [
+    featureType: "water",
+    elementType: "geometry",
+    stylers: [
       {
-        "color": "#17263c"
-      }
-    ]
+        color: "#17263c",
+      },
+    ],
   },
   {
-    "featureType": "water",
-    "elementType": "labels.text.fill",
-    "stylers": [
+    featureType: "water",
+    elementType: "labels.text.fill",
+    stylers: [
       {
-        "color": "#515c6d"
-      }
-    ]
+        color: "#515c6d",
+      },
+    ],
   },
   {
-    "featureType": "water",
-    "elementType": "labels.text.stroke",
-    "stylers": [
+    featureType: "water",
+    elementType: "labels.text.stroke",
+    stylers: [
       {
-        "color": "#17263c"
-      }
-    ]
-  }
-]
+        color: "#17263c",
+      },
+    ],
+  },
+];
 
 const styles = StyleSheet.create({
   container: {

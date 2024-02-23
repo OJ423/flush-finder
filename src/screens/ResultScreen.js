@@ -14,12 +14,18 @@ import ListView from "../components/results-screen/ListView";
 
 export default function ResultScreen() {
   const [fullMap, setFullMap] = useState(false);
+  const [selectedToilet, setSelectedToilet] = useState(null)
+
+  const [initialRegion, setInitialRegion] = useState({});
 
   const { toiletResponse, setToiletResponse } = useContext(ToiletResponseContext);
   const { originLocation } = useContext(OriginLocationContext);
   const [isLoading, setIsLoading] = useState(true);
   const [noToilets, setNoToilets] = useState(false);
 
+
+
+  console
   useEffect(() => {
     setNoToilets(false);
     setIsLoading(true);
@@ -88,9 +94,9 @@ export default function ResultScreen() {
               <ActivityIndicator size="large" color="blue" />
             </Block>
           ) : fullMap ? (
-            <FullMapView setFullMap={setFullMap} />
+            <FullMapView setFullMap={setFullMap} initialRegion={initialRegion} setInitialRegion={setInitialRegion}/>
           ) : (
-            <ListView setFullMap={setFullMap} />
+            <ListView setFullMap={setFullMap} initialRegion={initialRegion} setInitialRegion={setInitialRegion} setSelectedToilet={setSelectedToilet} selectedToilet={selectedToilet}/>
           )}
         </Block>
         </>
