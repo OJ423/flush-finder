@@ -19,3 +19,22 @@ export function fetchData(originLocation) {
     })
 }
 
+export function fetchCityToilets(originLocation) {
+  return axios
+  .get(`https://flush-finder-be.onrender.com/api/${originLocation.city}/toilets`)
+  .then((response) => {
+    console.log(response.data.cityToilets[0].toilets.length)
+    return response.data.cityToilets[0].toilets
+  })
+}
+
+// Cities API call
+
+export function fetchCities() {
+  return axios
+    .get(`https://flush-finder-be.onrender.com/api/cities`)
+    .then((response) => {
+      return response.data.cities
+    })
+}
+
