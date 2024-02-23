@@ -29,9 +29,7 @@ export default function ResultScreen() {
   useEffect(() => {
     setNoToilets(false);
     setIsLoading(true);
-    // setToiletResponse(null);
     if(originLocation.city === undefined) {
-      console.log("Should not be getting through here")
     !Object.keys(originLocation).length
       ? null
       : fetchData(originLocation)
