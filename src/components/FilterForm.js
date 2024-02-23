@@ -7,7 +7,7 @@ export default function FilterForm ({isAccessibleOnly, setIsAccessibleOnly,hasCh
 
   return (
     <>
-      <Text muted color="white" style={{marginTop:20, marginBottom: 10}}>Only show results with: </Text>
+      <Text muted color="white" style={{marginTop:40, marginBottom: 10}}>Only show results with: </Text>
     <Block row>
     <Block center flex={1}>
   <Switch accessibilityLabel={`Accesssible ${isAccessibleOnly}`} aria-value="off" color="white"   value={isAccessibleOnly}
