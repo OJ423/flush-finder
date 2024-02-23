@@ -7,11 +7,11 @@ import { useNavigation } from "@react-navigation/core";
 
 const { height, width } = Dimensions.get("screen")
 
-export default function List({ setSelectedToilet }) {
+export default function List({ setSelectedToilet, selectedToilet }) {
   const { toiletResponse } = useContext(ToiletResponseContext);
   const navigation = useNavigation();
 
-  const handleToiletView = () => {navigation.navigate('ToiletView')}
+  const handleToiletView = () => {navigation.navigate('ToiletView', {selectedToilet})}
 
   const data = toiletResponse.map(
     ({
@@ -45,41 +45,38 @@ export default function List({ setSelectedToilet }) {
       );
       obj.content = (
         <>
-          <Block style={{padding:20}}>
-            <Text muted>{name}</Text>
+          <Block style={{padding:10}}>
+            <Text muted bold={true}>{name}</Text>
             <Text>Address: {street}</Text>
-            {/* <Text style={{ flexWrap: 'wrap' }}>
-              Direction:{" "}
-              {(directions === null) | (directions === "") ? "N/A" : directions}
-            </Text> */}
-            <Text>
-              Unisex:{" "}
-              {unisex === true ? (
-                <>
-                  <Icon
-                    name={"check-circle"}
-                    size={15}
-                    color="#3CB043"
-                    family="Feather"
-                    />
-                  <Text muted> Yes</Text>
-                </>
-              ) : (
-                <>
-                  <Icon
-                    name={"thumbs-down"}
-                    size={15}
-                    color="tomato"
-                    family="Feather"
-                    />
-                  <Text muted> No</Text>
-                </>
-              )}{" "}
-            </Text>
-            <Text>
-              Accessiblity-friendly:{" "} 
-              {accessible === true ? (
-                <>
+          <Block flex center row>
+              <Block flex={2} center borderRadius={20} backgroundColor={"#f3f3f3"} height={100}  space="around" style={{margin:5}}>
+                <Text bold={true}>Unisex?</Text>
+                {unisex === true ? (
+                    <>
+                      <Icon
+                        name={"check-circle"}
+                        size={15}
+                        color="#3CB043"
+                        family="Feather"
+                        />
+                      <Text muted> Yes</Text>
+                    </>
+                  ) : (
+                    <>
+                      <Icon
+                        name={"thumbs-down"}
+                        size={15}
+                        color="tomato"
+                        family="Feather"
+                        />
+                      <Text muted> No</Text>
+                    </>
+                  )}
+              </Block>
+            <Block flex={2} borderRadius={20} backgroundColor={"#f3f3f3"} height={100} center  space="around" style={{margin:5}}>
+              <Text bold={true}>Accessible?</Text> 
+                {accessible === true ? (
+                  <>
                   <Icon
                     name={"check-circle"}
                     size={15}
@@ -87,9 +84,9 @@ export default function List({ setSelectedToilet }) {
                     family="Feather"
                     />
                   <Text muted>Yes</Text>
-                </>
-              ) : (
-                <>
+                  </>
+                ) : (
+                  <>
                   <Icon
                     name={"thumbs-down"}
                     size={15}
@@ -98,10 +95,10 @@ export default function List({ setSelectedToilet }) {
                     />
                   <Text muted> No</Text>
                 </>
-              )}{" "}
-            </Text>
-            <Text>
-              Has changing table:{" "}
+                )}
+            </Block>
+            <Block flex={2} borderRadius={20} backgroundColor={"#f3f3f3"} height={100} center  space="around" style={{margin:5}}>
+            <Text bold={true} style={{textAlign:"center"}}>Changing table?</Text>
               {changing_table === true ? (
                 <>
                   <Icon
@@ -123,7 +120,8 @@ export default function List({ setSelectedToilet }) {
                   <Text muted> No</Text>
                 </>
               )}
-            </Text>
+            </Block>
+          </Block>
           <Button title="See more..." onPress={handleToiletView} >MORE INFO</Button>
           </Block>
         </>
