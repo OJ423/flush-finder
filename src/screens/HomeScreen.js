@@ -26,7 +26,6 @@ export default function HomeScreen() {
   const [isLoading, setIsLoading] = useState(true);
   const [cityOriginLocation, setCityOriginLocation] = useState(null)
   const {setOriginLocation} = useContext(OriginLocationContext)
-
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -101,8 +100,8 @@ export default function HomeScreen() {
               style={styles.button}
               onPress={() => {
                 if(cityOriginLocation){
-                  setOriginLocation({latitude: cityOriginLocation.latitude, longitude: cityOriginLocation.longitude, accessible: isAccessibleOnly, unisex: isUnisexOnly, changingTable: hasChangingTable})
-                  navigation.navigate('Toilets Near You', {isAccessibleOnly, isUnisexOnly, hasChangingTable})
+                  setOriginLocation({city: cityOriginLocation.city, latitude: cityOriginLocation.latitude, longitude: cityOriginLocation.longitude, accessible: isAccessibleOnly, unisex: isUnisexOnly, changingTable: hasChangingTable})
+                  navigation.navigate('Toilets Near You')
                 }
               }}
             >

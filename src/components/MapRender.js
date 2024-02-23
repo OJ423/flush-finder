@@ -22,7 +22,7 @@ export default function MapRender({ mapStyle, selectedToilet }) {
   const [isLoading, setIsLoading] = useState(true);
 
   const { originLocation } = useContext(OriginLocationContext);
-  const { toiletResponse } = useContext(ToiletResponseContext);
+  const { toiletResponse, setToiletResponse } = useContext(ToiletResponseContext);
 
   useEffect(() => {
     setIsLoading(true);
@@ -45,6 +45,7 @@ export default function MapRender({ mapStyle, selectedToilet }) {
       setInitialRegion(newInitialRegion);
       setIsLoading(false);
     }
+
   }, [originLocation, selectedToilet]);
 
   return isLoading ? (
@@ -80,6 +81,7 @@ export default function MapRender({ mapStyle, selectedToilet }) {
                 <Marker
                   pinColor={"blue"}
                   key={toilet.id}
+
                   draggable
                   coordinate={{
                     latitude: toilet.latitude,
@@ -89,10 +91,11 @@ export default function MapRender({ mapStyle, selectedToilet }) {
                     alert(JSON.stringify(event.nativeEvent.coordinate))
                   }
                   title={toilet.name}
-                  description={toilet.directions}
+                  description={toilet.comment}
                 >
                   <Image source={toiletPin} style={{ height: 30, width: 30 }} />
                 </Marker>
+                </>
               ))}
         </MapView>
       )}
