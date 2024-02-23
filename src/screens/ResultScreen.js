@@ -15,13 +15,13 @@ import ListView from "../components/results-screen/ListView";
 export default function ResultScreen() {
   const [fullMap, setFullMap] = useState(false);
   const [selectedToilet, setSelectedToilet] = useState(null)
-
   const [initialRegion, setInitialRegion] = useState({});
-
-  const { toiletResponse, setToiletResponse } = useContext(ToiletResponseContext);
-  const { originLocation } = useContext(OriginLocationContext);
   const [isLoading, setIsLoading] = useState(true);
   const [noToilets, setNoToilets] = useState(false);
+
+  const { setToiletResponse } = useContext(ToiletResponseContext);
+  const { originLocation } = useContext(OriginLocationContext);
+
 
 
 

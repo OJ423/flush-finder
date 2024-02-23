@@ -39,8 +39,8 @@ export default function MapRender({ mapStyle, selectedToilet }) {
       const newInitialRegion = {
         latitude: selectedToilet[0].latitude,
         longitude: selectedToilet[0].longitude,
-        latitudeDelta: 0.01,
-        longitudeDelta: 0.01,
+        latitudeDelta: 0.0015,
+        longitudeDelta: 0.0015,
       };
       setInitialRegion(newInitialRegion);
       setIsLoading(false);
@@ -59,6 +59,7 @@ export default function MapRender({ mapStyle, selectedToilet }) {
           style={mapStyle}
           customMapStyle={customMapStyle}
           initialRegion={initialRegion}
+          key={initialRegion.latitude}
         >
           {originLocation && (
             <Marker
@@ -95,7 +96,6 @@ export default function MapRender({ mapStyle, selectedToilet }) {
                 >
                   <Image source={toiletPin} style={{ height: 30, width: 30 }} />
                 </Marker>
-                </>
               ))}
         </MapView>
       )}
