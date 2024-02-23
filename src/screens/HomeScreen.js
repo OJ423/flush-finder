@@ -55,7 +55,7 @@ export default function HomeScreen() {
   }
 
   return (
-    <Block flex style={styles.container} onLayout={onLayoutRootView}>
+    <Block width={width-40} center flex style={styles.container} onLayout={onLayoutRootView}>
       <StatusBar barStyle="light-content" />
       <Block flex center>
         <ImageBackground
@@ -83,14 +83,6 @@ export default function HomeScreen() {
               Find your nearest loo.
             </Text>
           </Block>
-          <Block row>
-            <Block style={styles.rowGap} safe flex={5}>
-              <CityDropdown setCityOriginLocation={setCityOriginLocation}/>
-            </Block>
-            <Block style={styles.rowGap} flex={1}>
-              <GeoLocationButton ada={isAccessibleOnly} unisex={isUnisexOnly} changing_table={hasChangingTable} />
-            </Block>
-          </Block>
           <FilterForm
             isAccessibleOnly={isAccessibleOnly}
             setIsAccessibleOnly={setIsAccessibleOnly}
@@ -99,8 +91,12 @@ export default function HomeScreen() {
             isUnisexOnly={isUnisexOnly}
             setIsUnisexOnly={setIsUnisexOnly}
           />
-          <Block style={styles.rowGap} center>
-            <Button
+          <Block row center>
+            <Block style={styles.rowGap} safe flex={5}>
+              <CityDropdown setCityOriginLocation={setCityOriginLocation}/>
+            </Block>
+            <Block style={styles.rowGap} flex={2}>
+             <Button
               shadowless
               style={styles.button}
               onPress={() => {
@@ -110,8 +106,17 @@ export default function HomeScreen() {
                 }
               }}
             >
-              SUBMIT
+              Search
             </Button>
+            </Block>
+          </Block>
+
+          <Block row center>
+            <Block row center style={styles.geoLocationArea} safe >
+              <Text style={{textAlign:"right", color:"white", fontSize: 18, marginRight: 20}}>Use Current Location</Text>
+              <GeoLocationButton ada={isAccessibleOnly} unisex={isUnisexOnly} changing_table={hasChangingTable} />
+            </Block>
+      
           </Block>
         </Block>
         </Block>
@@ -128,13 +133,17 @@ const styles = StyleSheet.create({
   rowGap: {
     marginTop:20,
   },
+  geoLocationArea: {
+    marginTop:20,
+    justifyContent: "center"
+  },
   padded: {
     paddingHorizontal: theme.SIZES.BASE * 2,
     position: "relative",
     bottom: theme.SIZES.BASE,
   },
   button: {
-    width: width - theme.SIZES.BASE * 4,
+    width: 80,
     height: theme.SIZES.BASE * 3,
     shadowRadius: 0,
     shadowOpacity: 0,
