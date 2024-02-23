@@ -11,9 +11,8 @@ export default function List({ setSelectedToilet }) {
   const { toiletResponse } = useContext(ToiletResponseContext);
   const navigation = useNavigation();
 
-  const handleToiletView = () => {
-    navigation.navigate('ToiletView')
-  }
+  const handleToiletView = () => {navigation.navigate('ToiletView')}
+
   const data = toiletResponse.map(
     ({
       accessible,
@@ -170,12 +169,15 @@ const customAccordionStyle = {
   height:height / 2,
 }
 
-function onOpenHandler(value) {
+function onAccordionOpenHandler(value) {
   setSelectedToilet(value.singleToiletData)
+ }
+function onAccordionCloseHandler() {
+  setSelectedToilet(null)
  }
 
   return (
-    <Accordion onAccordionOpen={onOpenHandler} dataArray={data} opened={null} style={customAccordionStyle} listStyle={customListStyle} headerStyle={customHeaderStyle} contentStyle={customContentStyle} />
+    <Accordion onAccordionOpen={onAccordionOpenHandler} onAccordionClose={onAccordionCloseHandler} dataArray={data} opened={null} style={customAccordionStyle} listStyle={customListStyle} headerStyle={customHeaderStyle} contentStyle={customContentStyle} />
   );
 }
 
