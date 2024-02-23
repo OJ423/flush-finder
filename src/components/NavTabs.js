@@ -8,6 +8,7 @@ import FullMapView from './results-screen/FullMapView';
 import { OriginLocationContext } from '../context/OriginLocation';
 import React, {useContext} from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import ToiletScreen from '../screens/ToiletScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -42,6 +43,7 @@ export default function NavTabs() {
           <Stack.Navigator > 
         <Stack.Screen options={{headerShown: false}} name="FlushFinder" component={BottomTabNav} />
         <Stack.Screen options={{headerStyle: {backgroundColor: '#E83E8C'}, headerTintColor: '#fff', headerTitleStyle: {fontWeight: 'bold'},}} name="Toilets Near You" component={ResultScreen} />
+        <Stack.Screen options={{headerStyle: {backgroundColor: '#E83E8C'}, headerTintColor: '#fff', headerTitleStyle: {fontWeight: 'bold'},}} name="ToiletView" component={ToiletScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   )
