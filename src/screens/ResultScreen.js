@@ -22,8 +22,6 @@ export default function ResultScreen() {
   const { setToiletResponse } = useContext(ToiletResponseContext);
   const { originLocation } = useContext(OriginLocationContext);
 
-
-
   useEffect(() => {
     setNoToilets(false);
     setIsLoading(true);
@@ -32,7 +30,15 @@ export default function ResultScreen() {
       ? null
       : fetchData(originLocation)
         .then((response) => {
-          const nearbyToilets = response.filter((toilet) => {
+          let nearbyToilets
+          if(originLocation.changingTable) {
+              nearbyToilets = response.filter((toilet) => {
+              if(toilet.distance <= 10 && toilet.changing_table) {
+                return toilet
+              }
+            })
+          } else 
+            nearbyToilets = response.filter((toilet) => {
             if(toilet.distance <= 10) {
               return toilet
             }
