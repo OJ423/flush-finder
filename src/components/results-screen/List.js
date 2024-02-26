@@ -48,7 +48,7 @@ export default function List({ setSelectedToilet, selectedToilet }) {
           <Block style={{padding:10}}>
             <Text muted bold={true}>{name}</Text>
             <Text>Address: {street}</Text>
-          <Block flex center row>
+          <Block flex center row width={width-80}>
               <Block flex={2} center borderRadius={20} backgroundColor={"#f3f3f3"} height={100}  space="around" style={{margin:5}}>
                 <Text bold={true}>Unisex?</Text>
                 {unisex === true ? (
