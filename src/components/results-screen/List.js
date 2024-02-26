@@ -45,11 +45,11 @@ export default function List({ setSelectedToilet, selectedToilet }) {
       );
       obj.content = (
         <>
-          <Block style={{padding:10}}>
+          <Block width={width-80} space="around"  >
             <Text muted bold={true}>{name}</Text>
             <Text>Address: {street}</Text>
-          <Block flex center row>
-              <Block flex={2} center borderRadius={20} backgroundColor={"#f3f3f3"} height={100}  space="around" style={{margin:5}}>
+          <Block  center row safe >
+              <Block flex={1} center borderRadius={20} backgroundColor={"#f3f3f3"} height={100}  space="around" style={{margin:5}}>
                 <Text bold={true}>Unisex?</Text>
                 {unisex === true ? (
                     <>
@@ -73,7 +73,7 @@ export default function List({ setSelectedToilet, selectedToilet }) {
                     </>
                   )}
               </Block>
-            <Block flex={2} borderRadius={20} backgroundColor={"#f3f3f3"} height={100} center  space="around" style={{margin:5}}>
+            <Block flex={1} borderRadius={20} backgroundColor={"#f3f3f3"} height={100} center  space="around" style={{margin:5}}>
               <Text bold={true}>Accessible?</Text> 
                 {accessible === true ? (
                   <>
@@ -97,7 +97,7 @@ export default function List({ setSelectedToilet, selectedToilet }) {
                 </>
                 )}
             </Block>
-            <Block flex={2} borderRadius={20} backgroundColor={"#f3f3f3"} height={100} center  space="around" style={{margin:5}}>
+            <Block flex={1} borderRadius={20} backgroundColor={"#f3f3f3"} height={100} center  space="around" style={{margin:5}}>
             <Text bold={true} style={{textAlign:"center"}}>Changing table?</Text>
               {changing_table === true ? (
                 <>
