@@ -119,9 +119,11 @@ export default function List({ setSelectedToilet, selectedToilet }) {
               )}
             </Block>
             </Block>
+            {toiletResponse[0].comment_count === undefined ? null :
             <Block>
               <VotePanel selectedToilet={selectedToilet}/>
             </Block>
+            }
           </Block>
         </>
       );
