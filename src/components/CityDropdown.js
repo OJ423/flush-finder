@@ -13,11 +13,13 @@ export default function CityDropdown({setCityOriginLocation}) {
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
-  
+  let options
 
-  const options = cities.map((city) => {
-    return {label: city.name, value: city.name }
-  })
+  if(cities.length > 0) {
+    options = cities.map((city) => {
+      return {label: city.name, value: city.name }
+    })
+  }
 
   const handleValueChange = (item) => {
     const {value} = item
