@@ -25,7 +25,6 @@ export default function ResultScreen() {
   useEffect(() => {
     setNoToilets(false);
     setIsLoading(true);
-    // setToiletResponse(null);
     if(originLocation.city === undefined) {
     !Object.keys(originLocation).length
       ? null

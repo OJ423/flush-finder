@@ -11,7 +11,7 @@ export default function ListView({ setFullMap, setSelectedToilet, selectedToilet
           <ResultsMap setFullMap={setFullMap} selectedToilet={selectedToilet} />
         </Block>
         <Block shadow flex center>
-          <List setSelectedToilet={setSelectedToilet}/>
+          <List setSelectedToilet={setSelectedToilet} selectedToilet={selectedToilet} />
         </Block>
       </Block>
     </>

@@ -74,7 +74,7 @@ export default function HomeScreen() {
         <Block flex style={{ zIndex: 2, justifyContent:"flex-end", marginBottom:150 }}>
           <Block>
             <Block>
-              <Text color="white" size={50}>
+              <Text bold={true} color="white" size={50}>
                 FlushFinder
               </Text>
             </Block>
@@ -100,7 +100,7 @@ export default function HomeScreen() {
               style={styles.button}
               onPress={() => {
                 if(cityOriginLocation){
-                  setOriginLocation({city: cityOriginLocation.city, latitude: cityOriginLocation.latitude, longitude: cityOriginLocation.longitude, accessible: isAccessibleOnly, unisex: isUnisexOnly, changingTable: hasChangingTable})
+                  setOriginLocation({city: cityOriginLocation.city, latitude: cityOriginLocation.latitude, longitude: cityOriginLocation.longitude, accessible: isAccessibleOnly, unisex: isUnisexOnly, changing_table: hasChangingTable})
                   navigation.navigate('Toilets Near You')
                 }
               }}
