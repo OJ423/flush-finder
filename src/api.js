@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export function fetchData(originLocation) {
-  console.log(originLocation)
   return axios
     .get(`https://www.refugerestrooms.org/api/v1/restrooms/by_location`, {
       params: {
