@@ -100,7 +100,7 @@ export default function HomeScreen() {
               style={styles.button}
               onPress={() => {
                 if(cityOriginLocation){
-                  setOriginLocation({city: cityOriginLocation.city, latitude: cityOriginLocation.latitude, longitude: cityOriginLocation.longitude, accessible: isAccessibleOnly, unisex: isUnisexOnly, changingTable: hasChangingTable})
+                  setOriginLocation({city: cityOriginLocation.city, latitude: cityOriginLocation.latitude, longitude: cityOriginLocation.longitude, accessible: isAccessibleOnly, unisex: isUnisexOnly, changing_table: hasChangingTable})
                   navigation.navigate('Toilets Near You')
                 }
               }}
