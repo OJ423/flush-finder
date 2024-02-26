@@ -24,8 +24,6 @@ export default function ResultScreen() {
 
 
 
-
-  console
   useEffect(() => {
     setNoToilets(false);
     setIsLoading(true);

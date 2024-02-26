@@ -8,22 +8,13 @@ export default function CityDropdown({setCityOriginLocation}) {
   
   const [selectedValue, setSelectedValue] = useState(null)
   const [cities, setCities] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
 
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
+
   
 
-  const renderLabel = () => {
-    if (value || isFocus) {
-      return (
-        <Text style={[styles.label, isFocus && { color: 'blue' }]}>
-          Dropdown label
-        </Text>
-      );
-    }
-    return null;
-  };
-  
   const options = cities.map((city) => {
     return {label: city.name, value: city.name }
   })
@@ -35,19 +26,22 @@ export default function CityDropdown({setCityOriginLocation}) {
       setSelectedValue(value)
       setIsFocus(false)
       const selectedCityData = cities.filter((city) => city.name === value)
-      setCityOriginLocation(selectedCityData.length ?{city: selectedCityData[0].name, latitude:selectedCityData[0].latitude, longitude: selectedCityData[0].longitude} : null)
+      setCityOriginLocation(selectedCityData.length ?{city: selectedCityData[0].name, latitude:+selectedCityData[0].latitude, longitude: +selectedCityData[0].longitude} : null)
     }
   }
+  
 
   useEffect(() => {
     fetchCities()
     .then((citiesResponse) => {
       setCities(citiesResponse)
+      setIsLoading(false)
     })
   },[])
   
   return(
     <View style={{backgroundColor:"white", borderRadius:5, marginEnd:20}}>
+      {isLoading ? null :
       <Dropdown
         style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
         placeholderStyle={styles.placeholderStyle}
@@ -74,6 +68,7 @@ export default function CityDropdown({setCityOriginLocation}) {
           />
         )}
       />
+        }
     </View>
   )
 }
