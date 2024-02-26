@@ -1,17 +1,14 @@
-import { Accordion, Icon, Block, Button, Text } from "galio-framework";
+import { Accordion, Icon, Block, Text } from "galio-framework";
 import { useContext } from "react";
 import { ToiletResponseContext } from "../../context/ToiletResponse";
 import React from "react";
 import { StyleSheet,Dimensions } from "react-native";
-import { useNavigation } from "@react-navigation/core";
+import VotePanel from "../VotePanel";
 
 const { height, width } = Dimensions.get("screen")
 
 export default function List({ setSelectedToilet, selectedToilet }) {
   const { toiletResponse } = useContext(ToiletResponseContext);
-  const navigation = useNavigation();
-
-  const handleToiletView = () => {navigation.navigate('ToiletView', {selectedToilet})}
 
   const data = toiletResponse.map(
     ({
@@ -45,10 +42,10 @@ export default function List({ setSelectedToilet, selectedToilet }) {
       );
       obj.content = (
         <>
-          <Block width={width-80} space="around"  >
+          <Block width={width-80} space="between"  >
             <Text muted bold={true}>{name}</Text>
             <Text>Address: {street}</Text>
-          <Block  center row safe >
+          <Block center row safe >
               <Block flex={1} center borderRadius={20} backgroundColor={"#f3f3f3"} height={100}  space="around" style={{margin:5}}>
                 <Text bold={true}>Unisex?</Text>
                 {unisex === true ? (
@@ -121,8 +118,10 @@ export default function List({ setSelectedToilet, selectedToilet }) {
                 </>
               )}
             </Block>
-          </Block>
-          <Button title="See more..." onPress={handleToiletView} >MORE INFO</Button>
+            </Block>
+            <Block>
+              <VotePanel selectedToilet={selectedToilet}/>
+            </Block>
           </Block>
         </>
       );

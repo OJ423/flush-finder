@@ -11,10 +11,11 @@ const { height, width } = Dimensions.get("screen")
 export default function ToiletScreen() {
   const route = useRoute()
   const selectedToilet = route.params?.selectedToilet
+  const toiletLikes = route.params?.toiletLikes
   const toilet = selectedToilet[0]
   const [commenting, setCommenting] = useState(false)
   const [comments, setComments] = useState([])
-
+  
   const handleAddComment = () => {setCommenting(true)}
   return (<>
       <ScrollView>
@@ -108,11 +109,11 @@ export default function ToiletScreen() {
           <Block card flex center row borderRadius={0} backgroundColor={"#28c7fc"} width={width} height={100} style={styles.paddingLR}>
             <Block center flex={2}>
               <Icon style={{textAlign:"center"}} name={"heart"} size={30} color="#E83E8C" family="feather"/>
-              <Text bold={true} color="#050505">{toilet.votes}</Text>
+              <Text bold={true} color="#050505">{toiletLikes[0]}</Text>
             </Block>
             <Block center flex={2}>
               <Icon style={{textAlign:"center"}} name={"message-circle"} size={30} color="#E83E8C" family="feather"/>
-              <Text bold={true} color="#050505">{toilet.votes}</Text>
+              <Text bold={true} color="#050505">{toilet.comment_count}</Text>
             </Block>
             <Block center flex={2}>
             <Pressable center onPress={handleAddComment}>

@@ -13,6 +13,8 @@ export default function AddComment({setCommenting, setComments}) {
     setComments((currentComments) => [addedComment, ...currentComments])
     setCommenting(false)
   }
+
+  const cancelComment = () => {setCommenting(false)}
   
   return(
     <>
@@ -36,7 +38,14 @@ export default function AddComment({setCommenting, setComments}) {
         />
       </Block>
   </Block>
-  <Button onPress={submitComment}>Add Comment</Button>
+  <Block row left>
+    <Block flex={4}>
+      <Button style={styles.button} onPress={submitComment}>Add Comment</Button>
+    </Block>
+    <Block flex={2}>
+      <Button style={styles.button} color="warning" onPress={cancelComment}>Cancel</Button>
+    </Block>
+  </Block>
   </>
   )
 }
@@ -48,4 +57,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
   },
+  button: {
+    width:"auto"
+  }
 });
