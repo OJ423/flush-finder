@@ -1,5 +1,5 @@
 # Flush Finder
-An application for IOS and Android helping users find a public near them.
+An application for IOS and Android to help users find a public near them.
 
 ## Overview
 Flush Finder allows users to find toilets near them either by searching by city or via their device's geolocation. The application enables users to filter toilet results by:
@@ -8,7 +8,7 @@ Flush Finder allows users to find toilets near them either by searching by city 
 - Unisex
 - Changing facilities
 
-The application uses a MongoDB backed server that is hosted on Render. Please bear in mind that Render's free tier deactivates after 15 minutes of inactivity so you may have to wait 1-2 minutes when first using the application. Take a look at the [backend repo](https://github.com/AlfredoGvz/final-project-be).
+The application uses a MongoDB-backed server that is hosted on Render. Please bear in mind that Render's free tier deactivates after 15 minutes of inactivity so you may have to wait 1-2 minutes when first using the application. Take a look at the [backend repo](https://github.com/AlfredoGvz/final-project-be).
 
 ### Contributors
 
