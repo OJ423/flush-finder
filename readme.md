@@ -1,4 +1,4 @@
-#Flush Finder
+# Flush Finder
 An application for IOS and Android helping users find a public near them.
 
 ## Overview
