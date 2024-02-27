@@ -17,14 +17,14 @@ export default function ToiletScreen() {
   const [commenting, setCommenting] = useState(false)
   const [comments, setComments] = useState([])
   const [commentCount, setCommentCount] = useState(toilet.comment_count)
+  const [rerender, setRerender] = useState(false)
 
   useEffect(() => {
-    fetchComments(selectedToilet[0].id)
+    fetchComments(toilet.id)
     .then((response) => {
       setComments(response)
     })
-
-  },[selectedToilet])
+  },[selectedToilet, rerender])
 
   const handleAddComment = () => {setCommenting(true)}
 
@@ -40,7 +40,7 @@ export default function ToiletScreen() {
             <Text muted>{toilet.street}</Text>
             <Text size={14}>{toilet.comment}</Text>
           </Block>
-          {commenting ? <AddComment setCommenting={setCommenting} setComments={setComments} setCommentCount={setCommentCount} />
+          {commenting ? <AddComment setCommenting={setCommenting} setComments={setComments} setCommentCount={setCommentCount} rerender={rerender} setRerender={setRerender} toilet={toilet} />
           :
           <>
           <Block center row>

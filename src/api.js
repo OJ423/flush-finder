@@ -57,3 +57,23 @@ export function fetchComments(toiletID) {
     })
 }
 
+export function postComment(toiletID, body) {
+  return axios
+  .post(`https://flush-finder-be.onrender.com/api/review/${toiletID}`, body)
+  .then((response) => {
+    return response.data.posted
+  })
+}
+
+export function patchVote(toiletID, inc_votes) {
+  console.log(inc_votes)
+  return axios
+  .patch(`https://flush-finder-be.onrender.com/api/toilets/${toiletID}`, inc_votes)
+  .then((response) => {
+    return response.data.inc_vote
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+}
+
