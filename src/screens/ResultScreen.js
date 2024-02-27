@@ -26,7 +26,6 @@ export default function ResultScreen() {
   const { originLocation } = useContext(OriginLocationContext);
 
   async function prepareDataForGeoLocation(){
-    console.log('I am rendering geolocation')
     setNoToilets(false);
     setIsLoading(true);
     fetchData(originLocation)
@@ -59,7 +58,6 @@ export default function ResultScreen() {
   })}
 
   async function prepareDataForDropDownCities(){
-    console.log('I am rendering dropdown')
     try {
       setAppIsReady(false)
       
@@ -81,7 +79,6 @@ export default function ResultScreen() {
     } catch(err){
           console.log(err);
         } finally {
-          console.log(appIsReady,'hello')
           setAppIsReady(true)
         }
   }

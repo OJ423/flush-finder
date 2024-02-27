@@ -40,7 +40,6 @@ export default function CityDropdown({setCityOriginLocation}) {
       setAppIsReady(false)
       setIsLoading(true)
       try{
-        console.log(appIsReady,'trying here<--')
         fetchCities()
         .then((citiesResponse) => {
           setCities(citiesResponse)
