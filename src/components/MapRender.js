@@ -6,7 +6,7 @@ import {
   Image,
   Dimensions,
 } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { PROVIDER_GOOGLE, Marker} from "react-native-maps";
 
 import { OriginLocationContext } from "../context/OriginLocation";
 import { ToiletResponseContext } from "../context/ToiletResponse";
@@ -61,6 +61,7 @@ export default function MapRender({ mapStyle, selectedToilet }) {
           customMapStyle={customMapStyle}
           initialRegion={initialRegion}
           key={initialRegion.latitude}
+          provider={PROVIDER_GOOGLE}
         >
           {originLocation && (
             <Marker
