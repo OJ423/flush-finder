@@ -117,7 +117,7 @@ export default function ToiletScreen() {
               )}
             </Block>
           </Block>
-          <Block card flex center row borderRadius={0} backgroundColor={"#28c7fc"} width={width} height={100} style={styles.paddingLR}>
+          <Block card flex center row borderRadius={0} backgroundColor={"#f3f3f3"} width={width-20} height={80} style={styles.paddingLR}>
             <Block center flex={2}>
               <Icon style={{textAlign:"center"}} name={"heart"} size={30} color="#E83E8C" family="feather"/>
               <Text bold={true} color="#050505">{toiletLikes}</Text>
