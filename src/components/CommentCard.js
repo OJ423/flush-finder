@@ -3,8 +3,8 @@ import { StyleSheet } from "react-native";
 
 export default function ({comment}) {
   return(
-    <Block styles={styles.commentContainer} card height={50} middle left marginBottom={0} borderColor={"pink"} marginTop={20} padding={10}>
-      <Text>{comment.comment}</Text>
+    <Block styles={styles.commentContainer} card middle left marginBottom={0} borderColor={"pink"} marginTop={20} padding={10}>
+      <Text>{comment.review}</Text>
     </Block>
   )
 }

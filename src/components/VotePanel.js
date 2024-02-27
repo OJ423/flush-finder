@@ -3,6 +3,7 @@ import { Block, Icon, Text } from "galio-framework";
 import { useState, useEffect } from "react";
 import { Dimensions, Pressable } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { patchVote } from "../api";
 
 const { height, width } = Dimensions.get("screen");
 
@@ -10,6 +11,7 @@ export default function ({ selectedToilet }) {
   const navigation = useNavigation();
   const [toiletLikes, setToiletLikes] = useState(+selectedToilet[0].votes);
   const [liked, setLiked] = useState(false);
+  const [patchErr, setPatchErr] = useState(false)
   const handleToiletView = () => {
     navigation.navigate("ToiletView", { selectedToilet, toiletLikes });
   };
@@ -19,6 +21,7 @@ export default function ({ selectedToilet }) {
       setToiletLikes((currentLikes) => [+currentLikes + 1]);
       setLiked(true);
       try {
+        patchVote(selectedToilet[0].id, {inc_votes:1})
         const id = [`${selectedToilet[0].id}`, selectedToilet[0].id];
         const count = [
           `${selectedToilet[0].id}count`,
@@ -27,15 +30,20 @@ export default function ({ selectedToilet }) {
         await await AsyncStorage.multiSet([id, count]);
       } catch (e) {
         console.log(e);
+        setPatchErr(true)
+        setToiletLikes((currentLikes) => [+currentLikes - 1]);
       }
     } else {
       setToiletLikes((currentLikes) => [+currentLikes - 1]);
       setLiked(false);
       const keys = [`${selectedToilet[0].id}`, `${selectedToilet[0].id}count`];
       try {
+        patchVote(selectedToilet[0].id, {inc_votes:-1})
         await AsyncStorage.multiRemove(keys);
       } catch (e) {
         console.log(e);
+        setPatchErr(true)
+        setToiletLikes((currentLikes) => [+currentLikes + 1]);
       }
     }
   };
@@ -129,6 +137,7 @@ export default function ({ selectedToilet }) {
             />
           </Pressable>
         </Block>
+        {patchErr ? <Text>Sorry, there's been an error. Please try again.</Text> : null}
       </Block>
     </>
   );

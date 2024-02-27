@@ -1,16 +1,20 @@
 import { StyleSheet, TextInput } from "react-native";
 import {Block, Button, Text} from 'galio-framework'
 import { useState } from "react";
+import { postComment } from "../api";
 
-export default function AddComment({setCommenting, setComments, setCommentCount}) {
+export default function AddComment({setCommenting, setComments, setCommentCount, rerender, setRerender, toilet}) {
   const [newComment, setNewComment] = useState()
-
   const handleChangeComment = (value) => {setNewComment(value)}
   const submitComment = () => {
-    const addedComment = {_id: newComment, comment: newComment}
-    setComments((currentComments) => [addedComment, ...currentComments])
     setCommenting(false)
     setCommentCount((currentCount) => [+currentCount+1])
+    postComment(toilet.id, {review:newComment})
+    .then((response) => {
+      const addedComment = {_id: newComment, review: newComment}
+      setComments((currentComments) => [addedComment, ...currentComments])
+      setRerender(!rerender)
+    })
   }
 
   const cancelComment = () => {setCommenting(false)}
