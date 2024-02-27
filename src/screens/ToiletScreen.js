@@ -2,9 +2,10 @@ import { useRoute } from "@react-navigation/core";
 import { Block, Text, Icon } from "galio-framework";
 import { Dimensions, Pressable, ScrollView, StyleSheet } from "react-native";
 import ResultsMap from "../components/results-screen/ResultsMap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddComment from "../components/AddComment";
 import CommentCard from "../components/CommentCard";
+import { fetchComments } from "../api";
 
 const { height, width } = Dimensions.get("screen")
 
@@ -16,8 +17,17 @@ export default function ToiletScreen() {
   const [commenting, setCommenting] = useState(false)
   const [comments, setComments] = useState([])
   const [commentCount, setCommentCount] = useState(toilet.comment_count)
-  
+
+  useEffect(() => {
+    fetchComments(selectedToilet[0].id)
+    .then((response) => {
+      setComments(response)
+    })
+
+  },[selectedToilet])
+
   const handleAddComment = () => {setCommenting(true)}
+
   return (<>
       <ScrollView>
       <Block flex={6} safe={true} top>
@@ -110,7 +120,7 @@ export default function ToiletScreen() {
           <Block card flex center row borderRadius={0} backgroundColor={"#28c7fc"} width={width} height={100} style={styles.paddingLR}>
             <Block center flex={2}>
               <Icon style={{textAlign:"center"}} name={"heart"} size={30} color="#E83E8C" family="feather"/>
-              <Text bold={true} color="#050505">{toiletLikes[0]}</Text>
+              <Text bold={true} color="#050505">{toiletLikes}</Text>
             </Block>
             <Block center flex={2}>
               <Icon style={{textAlign:"center"}} name={"message-circle"} size={30} color="#E83E8C" family="feather"/>
@@ -128,7 +138,7 @@ export default function ToiletScreen() {
             {comments.length === 0 ? <Text>There are no comments for this toilet.</Text>
             :
             comments.map((comment)=> (
-             <CommentCard key={comment.name+comment.comment} comment={comment}/>
+             <CommentCard key={comment._id} comment={comment}/>
             ))
             }
           </Block>
