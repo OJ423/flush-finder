@@ -122,7 +122,7 @@ export default function ({ selectedToilet }) {
           <Pressable onPress={handleToiletView}>
             <Icon
               style={{ textAlign: "center" }}
-              name={"more-vertical"}
+              name={"more-horizontal"}
               size={20}
               color="#E83E8C"
               family="feather"
