@@ -15,6 +15,7 @@ export default function ToiletScreen() {
   const toilet = selectedToilet[0]
   const [commenting, setCommenting] = useState(false)
   const [comments, setComments] = useState([])
+  const [commentCount, setCommentCount] = useState(toilet.comment_count)
   
   const handleAddComment = () => {setCommenting(true)}
   return (<>
@@ -29,7 +30,7 @@ export default function ToiletScreen() {
             <Text muted>{toilet.street}</Text>
             <Text size={14}>{toilet.comment}</Text>
           </Block>
-          {commenting ? <AddComment setCommenting={setCommenting} setComments={setComments}/>
+          {commenting ? <AddComment setCommenting={setCommenting} setComments={setComments} setCommentCount={setCommentCount} />
           :
           <>
           <Block center row>
@@ -113,7 +114,7 @@ export default function ToiletScreen() {
             </Block>
             <Block center flex={2}>
               <Icon style={{textAlign:"center"}} name={"message-circle"} size={30} color="#E83E8C" family="feather"/>
-              <Text bold={true} color="#050505">{toilet.comment_count}</Text>
+              <Text bold={true} color="#050505">{commentCount}</Text>
             </Block>
             <Block center flex={2}>
             <Pressable center onPress={handleAddComment}>
