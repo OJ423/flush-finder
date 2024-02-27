@@ -10,6 +10,9 @@ Flush Finder allows users to find toilets near them either by searching by city 
 
 The application uses a MongoDB-backed server that is hosted on Render. Please bear in mind that Render's free tier deactivates after 15 minutes of inactivity so you may have to wait 1-2 minutes when first using the application. Take a look at the [backend repo](https://github.com/AlfredoGvz/final-project-be).
 
+![screenshots of the flush finder application showing the home page, search results and toilet view](https://raw.githubusercontent.com/OJ423/flush-finder/main/assets/flush-finder-screen-shots.png "Flush Finder Application Screenshots")
+
+
 ### Contributors
 
 This project was built by [Gareth](https://github.com/gazdean/), [Sabrina](https://github.com/cls-c), [Samson](https://github.com/samsonthompson), [Alfredo](https://github.com/AlfredoGvz), and [Oliver](https://github.com/OJ423/).
