@@ -2,7 +2,7 @@ import { StyleSheet, TextInput } from "react-native";
 import {Block, Button, Text} from 'galio-framework'
 import { useState } from "react";
 
-export default function AddComment({setCommenting, setComments}) {
+export default function AddComment({setCommenting, setComments, setCommentCount}) {
   const [commentName, setCommentName] = useState()
   const [newComment, setNewComment] = useState()
 
@@ -12,6 +12,7 @@ export default function AddComment({setCommenting, setComments}) {
     const addedComment = {name: commentName, comment: newComment}
     setComments((currentComments) => [addedComment, ...currentComments])
     setCommenting(false)
+    setCommentCount((currentCount) => [+currentCount+1])
   }
 
   const cancelComment = () => {setCommenting(false)}
