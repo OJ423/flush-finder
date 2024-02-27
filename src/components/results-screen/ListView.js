@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function ListView({ setFullMap, setSelectedToilet, selectedToilet}) {
   return (
     <>
-      <Block safe={true} top>
+      <Block top>
         <Block  flex center>
           <ResultsMap setFullMap={setFullMap} selectedToilet={selectedToilet} />
         </Block>

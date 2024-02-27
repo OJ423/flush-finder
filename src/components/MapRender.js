@@ -10,6 +10,7 @@ import MapView, { Marker } from "react-native-maps";
 
 import { OriginLocationContext } from "../context/OriginLocation";
 import { ToiletResponseContext } from "../context/ToiletResponse";
+import { Block } from "galio-framework";
 
 const locationPin = require("../../assets/locationPin.png");
 const toiletPin = require("../../assets/toiletPin.png");
@@ -49,7 +50,7 @@ export default function MapRender({ mapStyle, selectedToilet }) {
   }, [originLocation, selectedToilet]);
 
   return isLoading ? (
-    <View>
+    <View style={styles.container}>
       <ActivityIndicator size="large" color="blue" />
     </View>
   ) : (
