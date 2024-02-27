@@ -47,3 +47,13 @@ export function fetchCities() {
     })
 }
 
+// Reviews Call
+
+export function fetchComments(toiletID) {
+  return axios
+    .get(`https://flush-finder-be.onrender.com/api/reviews/${toiletID}`)
+    .then((response) => {
+      return response.data.reviews
+    })
+}
+

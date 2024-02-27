@@ -50,9 +50,9 @@ export default function MapRender({ mapStyle, selectedToilet }) {
   }, [originLocation, selectedToilet]);
 
   return isLoading ? (
-    <View style={styles.container}>
+    <Block style={styles.loadingContainer} flex center height={height/1.5} width={width}>
       <ActivityIndicator size="large" color="blue" />
-    </View>
+    </Block>
   ) : (
     <View style={styles.container}>
       {initialRegion && (
@@ -272,4 +272,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  loadingContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    width: width,
+    height: height/1.5
+  },
+
 });
