@@ -45,7 +45,7 @@ export default function HomeScreen() {
 
   const onLayoutRootView = useCallback(async () => {
     if (isLoading === false) {
-      await SplashScreen.hideAsync();
+      await SplashScreen.hideAsync();  
     }
   }, [isLoading]);
 

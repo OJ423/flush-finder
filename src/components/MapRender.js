@@ -6,10 +6,11 @@ import {
   Image,
   Dimensions,
 } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import MapView, { PROVIDER_GOOGLE, Marker} from "react-native-maps";
 
 import { OriginLocationContext } from "../context/OriginLocation";
 import { ToiletResponseContext } from "../context/ToiletResponse";
+import { Block } from "galio-framework";
 
 const locationPin = require("../../assets/locationPin.png");
 const toiletPin = require("../../assets/toiletPin.png");
@@ -49,9 +50,9 @@ export default function MapRender({ mapStyle, selectedToilet }) {
   }, [originLocation, selectedToilet]);
 
   return isLoading ? (
-    <View>
+    <Block style={styles.loadingContainer} flex center height={height/1.5} width={width}>
       <ActivityIndicator size="large" color="blue" />
-    </View>
+    </Block>
   ) : (
     <View style={styles.container}>
       {initialRegion && (
@@ -60,6 +61,7 @@ export default function MapRender({ mapStyle, selectedToilet }) {
           customMapStyle={customMapStyle}
           initialRegion={initialRegion}
           key={initialRegion.latitude}
+          provider={PROVIDER_GOOGLE}
         >
           {originLocation && (
             <Marker
@@ -271,4 +273,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  loadingContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    width: width,
+    height: height/1.5
+  },
+
 });

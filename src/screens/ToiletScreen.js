@@ -2,9 +2,10 @@ import { useRoute } from "@react-navigation/core";
 import { Block, Text, Icon } from "galio-framework";
 import { Dimensions, Pressable, ScrollView, StyleSheet } from "react-native";
 import ResultsMap from "../components/results-screen/ResultsMap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddComment from "../components/AddComment";
 import CommentCard from "../components/CommentCard";
+import { fetchComments } from "../api";
 
 const { height, width } = Dimensions.get("screen")
 
@@ -15,8 +16,26 @@ export default function ToiletScreen() {
   const toilet = selectedToilet[0]
   const [commenting, setCommenting] = useState(false)
   const [comments, setComments] = useState([])
-  
+  const [commentCount, setCommentCount] = useState(toilet.comment_count)
+  const [rerender, setRerender] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+  useEffect(() => {
+    setIsLoading(true)
+    try{
+      fetchComments(toilet.id)
+      .then((response) => {
+        setComments(response)
+      })
+    }
+    catch (e) {
+      console.warn(e)
+    } finally {
+      setIsLoading(false)
+    }
+  },[selectedToilet, rerender])
+
   const handleAddComment = () => {setCommenting(true)}
+
   return (<>
       <ScrollView>
       <Block flex={6} safe={true} top>
@@ -29,7 +48,7 @@ export default function ToiletScreen() {
             <Text muted>{toilet.street}</Text>
             <Text size={14}>{toilet.comment}</Text>
           </Block>
-          {commenting ? <AddComment setCommenting={setCommenting} setComments={setComments}/>
+          {commenting ? <AddComment setCommenting={setCommenting} setComments={setComments} setCommentCount={setCommentCount} rerender={rerender} setRerender={setRerender} toilet={toilet} />
           :
           <>
           <Block center row>
@@ -106,14 +125,14 @@ export default function ToiletScreen() {
               )}
             </Block>
           </Block>
-          <Block card flex center row borderRadius={0} backgroundColor={"#28c7fc"} width={width} height={100} style={styles.paddingLR}>
+          <Block card flex center row borderRadius={0} backgroundColor={"#f3f3f3"} width={width-20} space="around" height={80} style={styles.paddingLR}>
             <Block center flex={2}>
               <Icon style={{textAlign:"center"}} name={"heart"} size={30} color="#E83E8C" family="feather"/>
-              <Text bold={true} color="#050505">{toiletLikes[0]}</Text>
+              <Text bold={true} color="#050505">{toiletLikes}</Text>
             </Block>
             <Block center flex={2}>
               <Icon style={{textAlign:"center"}} name={"message-circle"} size={30} color="#E83E8C" family="feather"/>
-              <Text bold={true} color="#050505">{toilet.comment_count}</Text>
+              <Text bold={true} color="#050505">{commentCount}</Text>
             </Block>
             <Block center flex={2}>
             <Pressable center onPress={handleAddComment}>
@@ -127,7 +146,7 @@ export default function ToiletScreen() {
             {comments.length === 0 ? <Text>There are no comments for this toilet.</Text>
             :
             comments.map((comment)=> (
-             <CommentCard key={comment.name+comment.comment} comment={comment}/>
+             <CommentCard key={comment._id} comment={comment} isLoading={isLoading}/>
             ))
             }
           </Block>

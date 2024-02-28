@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { Dropdown } from 'react-native-element-dropdown';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { fetchCities } from "../api";
+import { AppReadyContext } from "../context/AppReady";
 
 export default function CityDropdown({setCityOriginLocation}) {
   
   const [selectedValue, setSelectedValue] = useState(null)
   const [cities, setCities] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const {appIsReady, setAppIsReady } = useContext(AppReadyContext)
 
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
@@ -34,16 +36,30 @@ export default function CityDropdown({setCityOriginLocation}) {
   
 
   useEffect(() => {
-    fetchCities()
-    .then((citiesResponse) => {
-      setCities(citiesResponse)
-      setIsLoading(false)
-    })
+    async function prepare(){
+      setAppIsReady(false)
+      setIsLoading(true)
+      try{
+        fetchCities()
+        .then((citiesResponse) => {
+          setCities(citiesResponse)
+          setIsLoading(false)
+        })
+        
+      } catch (e) {
+        console.warn(e)
+      } finally {
+        setAppIsReady(true)
+      }
+    }
+    prepare()
   },[])
   
   return(
     <View style={{backgroundColor:"white", borderRadius:5, marginEnd:20}}>
-      {isLoading ? null :
+      {
+      isLoading ? null 
+      :
       <Dropdown
         style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
         placeholderStyle={styles.placeholderStyle}

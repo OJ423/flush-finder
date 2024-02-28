@@ -1,17 +1,18 @@
 import { StyleSheet, TextInput } from "react-native";
 import {Block, Button, Text} from 'galio-framework'
 import { useState } from "react";
+import { postComment } from "../api";
 
-export default function AddComment({setCommenting, setComments}) {
-  const [commentName, setCommentName] = useState()
+export default function AddComment({setCommenting, setComments, setCommentCount, rerender, setRerender, toilet}) {
   const [newComment, setNewComment] = useState()
-
-  const handleChangeName = (value) => {setCommentName(value)}
   const handleChangeComment = (value) => {setNewComment(value)}
   const submitComment = () => {
-    const addedComment = {name: commentName, comment: newComment}
-    setComments((currentComments) => [addedComment, ...currentComments])
     setCommenting(false)
+    setCommentCount((currentCount) => [+currentCount+1])
+    postComment(toilet.id, {review:newComment})
+    .then((response) => {
+      setRerender(!rerender)
+    })
   }
 
   const cancelComment = () => {setCommenting(false)}
@@ -19,16 +20,7 @@ export default function AddComment({setCommenting, setComments}) {
   return(
     <>
     <Block row left>
-      <Block flex={3}>
-        <Text size={12} muted>Name</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={handleChangeName}
-          value={commentName}
-          placeholder="Your name"
-        />
-      </Block>
-      <Block flex={3}>
+      <Block flex={6}>
         <Text size={12} muted>Comment</Text>
         <TextInput
           style={styles.input}
