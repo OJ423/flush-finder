@@ -29,7 +29,7 @@ export default function ToiletScreen() {
     catch (e) {
       console.warn(e)
     } finally {
-      // setIsLoading(false)
+      setIsLoading(false)
     }
 
   },[selectedToilet])
