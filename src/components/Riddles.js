@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { fetchRiddle } from "../api";
-import { Button } from "galio-framework";
+import { Button, Text } from "galio-framework";
 
-import { Text, View, Dimensions, StyleSheet } from "react-native";
+import { View, Dimensions, StyleSheet } from "react-native";
 
 const { width, height } = Dimensions.get("screen");
 
@@ -15,6 +15,7 @@ export default function Riddles() {
     fetchRiddle()
       .then((response) => {
       setRiddle(response)
+      setRevealAnswer(false)
       })
       .catch((err) => {
         console.log(err);
@@ -22,7 +23,7 @@ export default function Riddles() {
   }, [nextRiddle]);
 
   return (
-    <View  style={{ flex: 1, width, justifyContent: "center", alignItems: "center", alignContent: "center" }}>
+    <View  style={{ width, justifyContent: "center", alignItems: "center", alignContent: "center" }}>
       <View style={styles.riddleContainer}>
         <Text style={styles.riddleText}>{riddle.riddle}</Text>
         {revealAnswer ? (
@@ -30,7 +31,6 @@ export default function Riddles() {
         ) : null}
         <View
           style={{
-            flex: 1,
             flexDirection: "row",
             marginTop: 20,
           }}
@@ -38,13 +38,14 @@ export default function Riddles() {
           <Button
             style={styles.button}
             onPress={() => {
-              revealAnswer ? setRevealAnswer(true): setRevealAnswer(false)
+              setRevealAnswer(!revealAnswer)
             }}
           >
             Answer
           </Button>
           <Button
             style={styles.button}
+            color="warning"
             onPress={() => {
               setNextRiddle(!nextRiddle);
             }}
@@ -67,13 +68,15 @@ const styles = StyleSheet.create({
   },
 
   riddleContainer: {
-  
-      width: width - 100,
-      minHeight: height * 0.45,
-      padding: 10,
-      backgroundColor: "white",
-      borderRadius: 18,
- 
+    display:"flex",
+    alignItems: "center",
+    justifyContent:"center",
+    width: width - 100,
+    minHeight: height * 0.45,
+    padding: 10,
+    backgroundColor: "white",
+    borderRadius: 18,
+
   },
   riddleText: {
     fontSize: 16,
@@ -92,7 +95,7 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    width: 70,
-    height: 25,
+    width: "auto",
+    height: 35,
   },
 });

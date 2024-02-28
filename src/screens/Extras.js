@@ -2,9 +2,11 @@ import { Button } from "galio-framework";
 import QuotesCarousel from "../components/QuotesCarousel";
 import Riddles from "../components/Riddles";
 import { useState } from "react";
-import { Text, View, Dimensions, StyleSheet } from "react-native";
+import { ImageBackground, View, Dimensions, StyleSheet } from "react-native";
 
 const { height, width } = Dimensions.get("screen");
+const bkgImg = require('../../assets/on-the-loo-bkg.jpg');
+
 
 export default function Extras() {
   const [seeQuotes, setSeeQuotes] = useState(true);
@@ -12,6 +14,17 @@ export default function Extras() {
 
   return (
     <View style={styles.screenContainer}>
+      <ImageBackground
+      source={bkgImg}
+      style={{
+        height: height,
+        width: width,
+        zIndex: 1,
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center"
+      }}
+    >
       <View style={styles.container}>
         <View style={styles.carouselContainer}>
           {seeQuotes ? (
@@ -31,6 +44,7 @@ export default function Extras() {
         </View>
         )}
       </View>
+      </ImageBackground>
     </View>
   );
 }
