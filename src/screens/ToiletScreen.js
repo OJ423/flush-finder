@@ -17,11 +17,12 @@ export default function ToiletScreen() {
   const [commenting, setCommenting] = useState(false)
   const [comments, setComments] = useState([])
   const [commentCount, setCommentCount] = useState(toilet.comment_count)
+  const [rerender, setRerender] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   useEffect(() => {
     setIsLoading(true)
     try{
-      fetchComments(selectedToilet[0].id)
+      fetchComments(toilet.id)
       .then((response) => {
         setComments(response)
       })
@@ -31,8 +32,7 @@ export default function ToiletScreen() {
     } finally {
       setIsLoading(false)
     }
-
-  },[selectedToilet])
+  },[selectedToilet, rerender])
 
   const handleAddComment = () => {setCommenting(true)}
 
@@ -48,7 +48,7 @@ export default function ToiletScreen() {
             <Text muted>{toilet.street}</Text>
             <Text size={14}>{toilet.comment}</Text>
           </Block>
-          {commenting ? <AddComment setCommenting={setCommenting} setComments={setComments} setCommentCount={setCommentCount} />
+          {commenting ? <AddComment setCommenting={setCommenting} setComments={setComments} setCommentCount={setCommentCount} rerender={rerender} setRerender={setRerender} toilet={toilet} />
           :
           <>
           <Block center row>
@@ -125,7 +125,7 @@ export default function ToiletScreen() {
               )}
             </Block>
           </Block>
-          <Block card flex center row borderRadius={0} backgroundColor={"#28c7fc"} width={width} space="around" height={100} style={styles.paddingLR}>
+          <Block card flex center row borderRadius={0} backgroundColor={"#f3f3f3"} width={width-20} space="around" height={80} style={styles.paddingLR}>
             <Block center flex={2}>
               <Icon style={{textAlign:"center"}} name={"heart"} size={30} color="#E83E8C" family="feather"/>
               <Text bold={true} color="#050505">{toiletLikes}</Text>
