@@ -1,7 +1,11 @@
-import { Block, Text } from "galio-framework";
+import { Block, Text, Card } from "galio-framework";
 import { StyleSheet } from "react-native";
+import GhostLoading from "./GhostLoading";
 
-export default function ({comment}) {
+
+
+export default function CommentCard({comment, isLoading}) {
+  
   return(
     <Block styles={styles.commentContainer} card height={50} middle left marginBottom={0} borderColor={"pink"} marginTop={20} padding={10}>
       <Text>{comment.comment}</Text>

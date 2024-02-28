@@ -17,12 +17,20 @@ export default function ToiletScreen() {
   const [commenting, setCommenting] = useState(false)
   const [comments, setComments] = useState([])
   const [commentCount, setCommentCount] = useState(toilet.comment_count)
-
+  const [isLoading, setIsLoading] = useState(false)
   useEffect(() => {
-    fetchComments(selectedToilet[0].id)
-    .then((response) => {
-      setComments(response)
-    })
+    setIsLoading(true)
+    try{
+      fetchComments(selectedToilet[0].id)
+      .then((response) => {
+        setComments(response)
+      })
+    }
+    catch (e) {
+      console.warn(e)
+    } finally {
+      // setIsLoading(false)
+    }
 
   },[selectedToilet])
 
@@ -117,7 +125,7 @@ export default function ToiletScreen() {
               )}
             </Block>
           </Block>
-          <Block card flex center row borderRadius={0} backgroundColor={"#28c7fc"} width={width} height={100} style={styles.paddingLR}>
+          <Block card flex center row borderRadius={0} backgroundColor={"#28c7fc"} width={width} space="around" height={100} style={styles.paddingLR}>
             <Block center flex={2}>
               <Icon style={{textAlign:"center"}} name={"heart"} size={30} color="#E83E8C" family="feather"/>
               <Text bold={true} color="#050505">{toiletLikes}</Text>
@@ -138,7 +146,7 @@ export default function ToiletScreen() {
             {comments.length === 0 ? <Text>There are no comments for this toilet.</Text>
             :
             comments.map((comment)=> (
-             <CommentCard key={comment._id} comment={comment}/>
+             <CommentCard key={comment._id} comment={comment} isLoading={isLoading}/>
             ))
             }
           </Block>
