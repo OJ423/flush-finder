@@ -11,8 +11,6 @@ export default function AddComment({setCommenting, setComments, setCommentCount,
     setCommentCount((currentCount) => [+currentCount+1])
     postComment(toilet.id, {review:newComment})
     .then((response) => {
-      const addedComment = {_id: newComment, review: newComment}
-      setComments((currentComments) => [addedComment, ...currentComments])
       setRerender(!rerender)
     })
   }

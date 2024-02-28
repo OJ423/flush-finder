@@ -22,8 +22,16 @@ export default function CommentCard({ comment, isLoading }) {
       </Skeleton>
 =======
 export default function ({comment}) {
+  const dateObject = new Date(comment.created_at);
+  const options = {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  };
+  const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(dateObject);
   return(
     <Block styles={styles.commentContainer} card middle left marginBottom={0} borderColor={"pink"} marginTop={20} padding={10}>
+      <Text muted marginBottom={10}>{formattedDate}</Text>
       <Text>{comment.review}</Text>
 >>>>>>> af3de8d7c9bec87dc81cfa223b35cfe15fa5115c
     </Block>

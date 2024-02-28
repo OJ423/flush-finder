@@ -61,12 +61,11 @@ export function postComment(toiletID, body) {
   return axios
   .post(`https://flush-finder-be.onrender.com/api/review/${toiletID}`, body)
   .then((response) => {
-    return response.data.posted
+    return response
   })
 }
 
 export function patchVote(toiletID, inc_votes) {
-  console.log(inc_votes)
   return axios
   .patch(`https://flush-finder-be.onrender.com/api/toilets/${toiletID}`, inc_votes)
   .then((response) => {
