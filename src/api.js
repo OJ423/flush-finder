@@ -47,3 +47,20 @@ export function fetchCities() {
     })
 }
 
+// Quotes api call
+
+export function fetchQuotes() {
+  return axios
+    .get(`https://zenquotes.io/api/quotes`)
+    .then((response) => {
+      return response.data
+    })
+}
+
+export function fetchRiddle() {
+  return axios
+    .get(`https://riddles-api.vercel.app/random`)
+    .then((response) => {
+      return response.data
+    })
+}

@@ -1,0 +1,98 @@
+import { useEffect, useState } from "react";
+import { fetchRiddle } from "../api";
+import { Button } from "galio-framework";
+
+import { Text, View, Dimensions, StyleSheet } from "react-native";
+
+const { width, height } = Dimensions.get("screen");
+
+export default function Riddles() {
+  const [riddle, setRiddle] = useState([]);
+  const [revealAnswer, setRevealAnswer] = useState(false);
+  const [nextRiddle, setNextRiddle] = useState(false);
+
+  useEffect(() => {
+    fetchRiddle()
+      .then((response) => {
+      setRiddle(response)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [nextRiddle]);
+
+  return (
+    <View  style={{ flex: 1, width, justifyContent: "center", alignItems: "center", alignContent: "center" }}>
+      <View style={styles.riddleContainer}>
+        <Text style={styles.riddleText}>{riddle.riddle}</Text>
+        {revealAnswer ? (
+          <Text style={styles.answerText}>Answer: {riddle.answer}</Text>
+        ) : null}
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            marginTop: 20,
+          }}
+        >
+          <Button
+            style={styles.button}
+            onPress={() => {
+              revealAnswer ? setRevealAnswer(true): setRevealAnswer(false)
+            }}
+          >
+            Answer
+          </Button>
+          <Button
+            style={styles.button}
+            onPress={() => {
+              setNextRiddle(!nextRiddle);
+            }}
+          >
+            Next
+          </Button>
+        </View>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width,
+    justifyContent: "center",
+    alignItems: "center",
+    alignContent: "center"
+  },
+
+  riddleContainer: {
+  
+      width: width - 100,
+      minHeight: height * 0.45,
+      padding: 10,
+      backgroundColor: "white",
+      borderRadius: 18,
+ 
+  },
+  riddleText: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "black",
+    textAlign: "center",
+    marginTop: 10,
+    paddingBottom: 10,
+  },
+  answerText: {
+    fontSize: 14,
+    color: "black",
+    textAlign: "center",
+    marginTop: 2,
+    paddingBottom: 25,
+  },
+  button: {
+    flex: 1,
+    width: 70,
+    height: 25,
+  },
+});
