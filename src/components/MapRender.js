@@ -11,6 +11,7 @@ import MapView, { PROVIDER_GOOGLE, Marker} from "react-native-maps";
 import { OriginLocationContext } from "../context/OriginLocation";
 import { ToiletResponseContext } from "../context/ToiletResponse";
 import { Block } from "galio-framework";
+import { Skeleton } from "moti/skeleton";
 
 const locationPin = require("../../assets/locationPin.png");
 const toiletPin = require("../../assets/toiletPin.png");
@@ -49,60 +50,58 @@ export default function MapRender({ mapStyle, selectedToilet }) {
 
   }, [originLocation, selectedToilet]);
 
-  return isLoading ? (
-    <Block style={styles.loadingContainer} flex center height={height/1.5} width={width}>
-      <ActivityIndicator size="large" color="blue" />
-    </Block>
-  ) : (
-    <View style={styles.container}>
-      {initialRegion && (
-        <MapView
-          style={mapStyle}
-          customMapStyle={customMapStyle}
-          initialRegion={initialRegion}
-          key={initialRegion.latitude}
-          provider={PROVIDER_GOOGLE}
-        >
-          {originLocation && (
-            <Marker
-              coordinate={{
-                latitude: originLocation.latitude,
-                longitude: originLocation.longitude,
-              }}
-              style={{ zIndex: 1000 }}
-              title="Your Location"
-            >
-              <Image
-                source={locationPin}
-                style={{ height: 100, width: 100, zIndex: 1000 }}
-              />
-            </Marker>
-          )}
-          {!toiletResponse
-            ? null
-            : toiletResponse.map((toilet) => (
-                <Marker
-                  pinColor={"blue"}
-                  key={toilet.id}
-
-                  draggable
-                  coordinate={{
-                    latitude: toilet.latitude,
-                    longitude: toilet.longitude,
-                  }}
-                  onDragEnd={(event) =>
-                    alert(JSON.stringify(event.nativeEvent.coordinate))
-                  }
-                  title={toilet.name}
-                  description={toilet.comment}
-                >
-                  <Image source={toiletPin} style={{ height: 30, width: 30 }} />
-                </Marker>
-              ))}
-        </MapView>
-      )}
-    </View>
-  );
+  return (
+    <Skeleton colorMode={"light"} height={width} width={width} radius="square" show={isLoading}>
+         <View style={styles.container}>
+           {initialRegion && (
+             <MapView
+             style={mapStyle}
+             customMapStyle={customMapStyle}
+             initialRegion={initialRegion}
+             key={initialRegion.latitude}
+             provider={PROVIDER_GOOGLE}
+             >
+               {originLocation && (
+                 <Marker
+                   coordinate={{
+                     latitude: originLocation.latitude,
+                     longitude: originLocation.longitude,
+                   }}
+                   style={{ zIndex: 1000 }}
+                   title="Your Location"
+                   >
+                   <Image
+                     source={locationPin}
+                     style={{ height: 100, width: 100, zIndex: 1000 }}
+                     />
+                 </Marker>
+               )}
+               {!toiletResponse
+                 ? null
+                 : toiletResponse.map((toilet) => (
+                   <Marker
+                   pinColor={"blue"}
+                   key={toilet.id}
+                   
+                   draggable
+                   coordinate={{
+                     latitude: toilet.latitude,
+                     longitude: toilet.longitude,
+                   }}
+                   onDragEnd={(event) =>
+                     alert(JSON.stringify(event.nativeEvent.coordinate))
+                   }
+                   title={toilet.name}
+                   description={toilet.comment}
+                   >
+                       <Image source={toiletPin} style={{ height: 30, width: 30 }} />
+                     </Marker>
+                   ))}
+             </MapView>
+           )}
+         </View>
+    </Skeleton>
+       );
 }
 
 const customMapStyle = [

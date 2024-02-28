@@ -3,7 +3,6 @@ import { StyleSheet } from "react-native";
 import GhostLoading from "./GhostLoading";
 import { Skeleton } from "moti/skeleton";
 
-<<<<<<< HEAD
 export default function CommentCard({ comment, isLoading }) {
   return (
     <Block
@@ -18,14 +17,8 @@ export default function CommentCard({ comment, isLoading }) {
       padding={10}
     >
       <Skeleton colorMode="light" show={isLoading}>
-        <Text>{comment.comment}</Text>
+        <Text>{comment.review}</Text>
       </Skeleton>
-=======
-export default function ({comment}) {
-  return(
-    <Block styles={styles.commentContainer} card middle left marginBottom={0} borderColor={"pink"} marginTop={20} padding={10}>
-      <Text>{comment.review}</Text>
->>>>>>> af3de8d7c9bec87dc81cfa223b35cfe15fa5115c
     </Block>
   );
 }
