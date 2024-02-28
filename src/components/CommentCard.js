@@ -2,8 +2,16 @@ import { Block, Text } from "galio-framework";
 import { StyleSheet } from "react-native";
 
 export default function ({comment}) {
+  const dateObject = new Date(comment.created_at);
+  const options = {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  };
+  const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(dateObject);
   return(
     <Block styles={styles.commentContainer} card middle left marginBottom={0} borderColor={"pink"} marginTop={20} padding={10}>
+      <Text muted marginBottom={10}>{formattedDate}</Text>
       <Text>{comment.review}</Text>
     </Block>
   )
