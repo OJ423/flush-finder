@@ -4,11 +4,11 @@ import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../screens/HomeScreen'
 import ResultScreen from '../screens/ResultScreen'
 import About from '../screens/About'
-import FullMapView from './results-screen/FullMapView';
 import { OriginLocationContext } from '../context/OriginLocation';
 import React, {useContext} from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ToiletScreen from '../screens/ToiletScreen';
+import Extras from '../screens/Extras';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -19,22 +19,22 @@ export default function NavTabs() {
     return <Tab.Navigator values={{originLocation}}
           screenOptions={({ route }) => ({
             headerShown: false,
-            tabBarIcon: ({ focused, color, size }) => {
+            tabBarIcon: ({ color, size }) => {
               let iconName;
               if (route.name === 'Search') {
-                iconName = focused
-                  ? 'map-outline'
-                  : 'map-outline';
+                iconName = 'map-outline';
               } else if (route.name === 'About') {
-                iconName = focused ? 'people-outline' : 'people-outline';
-              } 
-              
+                iconName = 'people-outline';
+              } else if (route.name === 'Number 2?') {
+                iconName = "book-outline";
+              }
               return <Ionicons name={iconName} size={size} color={color} />;
             },
             tabBarActiveTintColor: '#e83e8c',
             tabBarInactiveTintColor: 'gray',
           })}>
         <Tab.Screen name="Search" component={HomeScreen} />
+        <Tab.Screen name="Number 2?" component={Extras} />
         <Tab.Screen name="About" component={About} />
       </Tab.Navigator>
   }
