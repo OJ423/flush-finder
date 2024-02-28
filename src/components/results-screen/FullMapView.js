@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
   fullMap: {
     width: width,
-    height: height-100,
+    height: height-98,
   },
   button: {
     width: 40,
