@@ -49,6 +49,8 @@ export default function MapRender({ mapStyle, selectedToilet }) {
 
   }, [originLocation, selectedToilet]);
 
+  console.log(toiletResponse[0].comment_count)
+
   return isLoading ? (
     <Block style={styles.loadingContainer} flex center height={height/1.5} width={width}>
       <ActivityIndicator size="large" color="blue" />
@@ -62,8 +64,9 @@ export default function MapRender({ mapStyle, selectedToilet }) {
           initialRegion={initialRegion}
           key={initialRegion.latitude}
           provider={PROVIDER_GOOGLE}
+          showsUserLocation={toiletResponse[0].comment_count === undefined ? true : false}
         >
-          {originLocation && (
+          {toiletResponse[0].comment_count === undefined ? null : originLocation && (
             <Marker
               coordinate={{
                 latitude: originLocation.latitude,
