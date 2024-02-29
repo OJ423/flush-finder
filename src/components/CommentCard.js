@@ -12,12 +12,9 @@ export default function ({comment}) {
   };
   const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(dateObject);
   return(
-    
     <Block styles={styles.commentContainer} card middle left marginBottom={0} borderColor={"pink"} marginTop={20} padding={10}>
-    <Skeleton colorMode="light" show={isLoading}>
       <Text muted marginBottom={10}>{formattedDate}</Text>
       <Text>{comment.review}</Text>
-        </Skeleton>
     </Block>
   );
 }
