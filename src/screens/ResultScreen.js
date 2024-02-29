@@ -107,8 +107,11 @@ export default function ResultScreen() {
         <>
           <StatusBar />
           <Block flex style={styles.container}>
-            {
-            fullMap ? (
+            {isLoading ? (
+              <Block>
+                <ActivityIndicator size="large" color="blue" />
+              </Block>
+            ) : fullMap ? (
               <FullMapView
                 setFullMap={setFullMap}
                 initialRegion={initialRegion}
