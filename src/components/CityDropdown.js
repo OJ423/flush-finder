@@ -5,18 +5,36 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { fetchCities } from "../api";
 import { AppReadyContext } from "../context/AppReady";
 
-export default function CityDropdown({setCityOriginLocation}) {
+export default function CityDropdown({ setCityOriginLocation}) {
   
   const [selectedValue, setSelectedValue] = useState(null)
   const [cities, setCities] = useState([])
   const [isLoading, setIsLoading] = useState(true)
-  const {appIsReady, setAppIsReady } = useContext(AppReadyContext)
 
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
   let options
 
+  useEffect(() => {
+    async function prepare(){
+      setIsLoading(true)
+      try{
+        fetchCities()
+        .then((citiesResponse) => {
+          setCities(citiesResponse)
+          setIsLoading(false)
+        })
+        
+      } catch (e) {
+        console.warn(e)
+      } finally {
+        
+      }
+    }
+    prepare()
+  },[])
+  
   if(cities.length > 0) {
     options = cities.map((city) => {
       return {label: city.name, value: city.name }
@@ -35,25 +53,6 @@ export default function CityDropdown({setCityOriginLocation}) {
   }
   
 
-  useEffect(() => {
-    async function prepare(){
-      setAppIsReady(false)
-      setIsLoading(true)
-      try{
-        fetchCities()
-        .then((citiesResponse) => {
-          setCities(citiesResponse)
-          setIsLoading(false)
-        })
-        
-      } catch (e) {
-        console.warn(e)
-      } finally {
-        setAppIsReady(true)
-      }
-    }
-    prepare()
-  },[])
   
   return(
     <View style={{backgroundColor:"white", borderRadius:5, marginEnd:20}}>
