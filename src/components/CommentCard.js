@@ -1,4 +1,4 @@
-import { Block, Text, Card } from "galio-framework";
+import { Block, Text } from "galio-framework";
 import { StyleSheet } from "react-native";
 import { Skeleton } from "moti/skeleton";
 

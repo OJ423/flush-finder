@@ -49,8 +49,6 @@ export default function MapRender({ mapStyle, selectedToilet }) {
 
   }, [originLocation, selectedToilet]);
 
-  console.log(toiletResponse[0].comment_count)
-
   return isLoading ? (
     <Block style={styles.loadingContainer} flex center height={height/1.5} width={width}>
       <ActivityIndicator size="large" color="blue" />
