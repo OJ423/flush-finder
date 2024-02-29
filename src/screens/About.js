@@ -1,16 +1,7 @@
 import React from "react";
-import { View, ScrollView, StyleSheet, Image, SectionList } from "react-native";
-import { Text, Block, DeckSwiper, theme } from 'galio-framework';
+import { View, ScrollView, StyleSheet, Image } from "react-native";
+import { Text, Block } from 'galio-framework';
 
-const howToUse = [<View style={{ backgroundColor: '#B23AFC', height: 550, width: 350 }}>
-
-</View>,
-<View style={{ backgroundColor: '#FE2472', height: 550, width: 350 }}>
-
-</View>,
-<View style={{ backgroundColor: '#FF9C09', height: 550, width: 350 }}>
-
-</View>]
 
 export default function About() {
   return( 
