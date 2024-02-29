@@ -3,22 +3,21 @@ import { StyleSheet } from "react-native";
 import GhostLoading from "./GhostLoading";
 import { Skeleton } from "moti/skeleton";
 
-export default function CommentCard({ comment, isLoading }) {
-  return (
-    <Block
-      styles={styles.commentContainer}
-      card
-      height={50}
-      middle
-      left
-      marginBottom={0}
-      borderColor={"pink"}
-      marginTop={20}
-      padding={10}
-    >
-      <Skeleton colorMode="light" show={isLoading}>
-        <Text>{comment.review}</Text>
-      </Skeleton>
+export default function ({comment}) {
+  const dateObject = new Date(comment.created_at);
+  const options = {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  };
+  const formattedDate = new Intl.DateTimeFormat("en-GB", options).format(dateObject);
+  return(
+    
+    <Block styles={styles.commentContainer} card middle left marginBottom={0} borderColor={"pink"} marginTop={20} padding={10}>
+    <Skeleton colorMode="light" show={isLoading}>
+      <Text muted marginBottom={10}>{formattedDate}</Text>
+      <Text>{comment.review}</Text>
+        </Skeleton>
     </Block>
   );
 }

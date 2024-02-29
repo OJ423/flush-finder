@@ -47,6 +47,26 @@ export function fetchCities() {
     })
 }
 
+
+// Quotes api call
+
+export function fetchQuotes() {
+  return axios
+    .get(`https://zenquotes.io/api/quotes`)
+    .then((response) => {
+      return response.data
+    })
+}
+
+export function fetchRiddle() {
+  return axios
+    .get(`https://riddles-api.vercel.app/random`)
+    .then((response) => {
+      return response.data
+    })
+}
+
+
 // Reviews Call
 
 export function fetchComments(toiletID) {
@@ -61,12 +81,11 @@ export function postComment(toiletID, body) {
   return axios
   .post(`https://flush-finder-be.onrender.com/api/review/${toiletID}`, body)
   .then((response) => {
-    return response.data.posted
+    return response
   })
 }
 
 export function patchVote(toiletID, inc_votes) {
-  console.log(inc_votes)
   return axios
   .patch(`https://flush-finder-be.onrender.com/api/toilets/${toiletID}`, inc_votes)
   .then((response) => {

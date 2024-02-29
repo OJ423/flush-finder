@@ -43,8 +43,8 @@ export default function List({ setSelectedToilet, selectedToilet }) {
       );
       obj.content = (
         <>
-          <Block width={width-80} space="between"  >
-            <Text muted bold={true}>{name}</Text>
+          <Block width={width-80} space="between" paddingTop={15} paddingLeft={10} >
+            <Text muted bold={true} >{name}</Text>
             <Text>Address: {street}</Text>
           <Block center row safe >
               <Block flex={1} center borderRadius={20} backgroundColor={"#f3f3f3"} height={100}  space="around" style={{margin:5}}>
