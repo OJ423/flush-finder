@@ -14,7 +14,7 @@ import { useNavigation } from "@react-navigation/core";
 import { OriginLocationContext } from "../context/OriginLocation";
 
 const { height, width } = Dimensions.get("screen");
-const backGroungImg = require("../../assets/HomeBackground.jpg");
+const bkgImg = require("../../assets/HomeBackground.jpg");
 
 SplashScreen.preventAutoHideAsync();
 
@@ -58,7 +58,7 @@ export default function HomeScreen() {
       <StatusBar barStyle="light-content" />
       <Block flex center>
         <ImageBackground
-          source={backGroungImg}
+          source={bkgImg}
           style={{
             height: height,
             width: width,
