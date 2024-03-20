@@ -1,6 +1,8 @@
 # Flush Finder
 An application for IOS and Android to help users find a public near them.
 
+Watch the [video](https://youtu.be/sETD106uFpE?si=C_Eon_SIfOvdBjHX).
+
 ## Overview
 Flush Finder allows users to find toilets near them either by searching by city or via their device's geolocation. The application enables users to filter toilet results by:
 
